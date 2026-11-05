@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#176b43">
+<title>طبيب أرضك | المساعد الزراعي الذكي</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Tahoma,Arial,sans-serif;background:#f3f7f3;color:#20352a}
+header{background:#176b43;color:white;padding:23px 18px;border-radius:0 0 24px 24px}
+header h1{margin:0;font-size:27px}
+header p{margin:9px 0 0;font-size:14px}
+.container{padding:16px;max-width:850px;margin:auto}
+.welcome{background:white;padding:18px;border-radius:17px;margin:15px 0;box-shadow:0 3px 12px #00000009}
+.welcome h2{color:#176b43;margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.card{background:white;padding:17px 12px;border-radius:16px;border:1px solid #e5eee6;cursor:pointer;text-align:center;min-height:115px}
+.card .emoji{font-size:30px}
+.card h3{font-size:15px;margin:9px 0 4px}
+.card p{font-size:12px;color:#718077;margin:0}
+.section{display:none;background:white;padding:18px;border-radius:17px;margin-top:15px}
+.section.active{display:block}
+h2{color:#176b43}
+button{background:#176b43;color:white;border:0;border-radius:10px;padding:12px 17px;cursor:pointer;font-size:14px}
+input,select,textarea{width:100%;padding:12px;margin:8px 0 14px;border:1px solid #d5e1d7;border-radius:9px;font-family:inherit;background:white}
+label{font-size:14px;font-weight:bold}
+.item{padding:13px;background:#f1f7f1;border-radius:10px;margin:9px 0}
+.back{background:#e5f1e8;color:#176b43;margin-bottom:10px}
+footer{text-align:center;color:#829087;font-size:12px;padding:25px}
+.small{font-size:12px;color:#718077}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<header>
+<h1>🌱 طبيب أرضك</h1>
+<p>مساعدك الذكي لصحة النبات والإنتاج الزراعي</p>
+</header>
+
+<main class="container">
+
+<div class="welcome" id="welcome">
+<h2>أهلاً بك في طبيب أرضك</h2>
+<p>اكتشف مشكلات محاصيلك، وتعلم طرق الزراعة الصحيحة، وتابع إنتاج المشروم.</p>
+<strong>معرفة زراعية تساعدك على اتخاذ القرار الصحيح.</strong>
+</div>
+
+<div class="grid" id="menu">
+<div class="card" onclick="show('diagnosis')"><div class="emoji">📷</div><h3>تشخيص أمراض النبات</h3><p>فحص أعراض وصور النباتات</p></div>
+<div class="card" onclick="show('crops')"><div class="emoji">🌾</div><h3>دليل المحاصيل</h3><p>معلومات وإرشادات زراعية</p></div>
+<div class="card" onclick="show('mushroom')"><div class="emoji">🍄</div><h3>عالم المشروم</h3><p>الأجاريكس والمحاري</p></div>
+<div class="card" onclick="show('pests')"><div class="emoji">🐛</div><h3>الآفات والحشرات</h3><p>التعرف على الآفات ومكافحتها</p></div>
+<div class="card" onclick="show('fertilizers')"><div class="emoji">🧪</div><h3>الأسمدة والتغذية</h3><p>العناصر الغذائية للنبات</p></div>
+<div class="card" onclick="show('calculator')"><div class="emoji">🧮</div><h3>الحاسبات الزراعية</h3><p>حسابات الإنتاج والتكاليف</p></div>
+</div>
+
+<section class="section" id="diagnosis">
+<button class="back" onclick="home()">← الرئيسية</button>
+<h2>📷 تشخيص مشكلات النبات</h2>
+<p>اختر المحصول وسجل الأعراض وارفع صورة للنبات.</p>
+<label>نوع المحصول</label>
+<select id="crop">
+<option>طماطم</option><option>بطاطس</option><option>قمح</option>
+<option>أرز</option><option>ذرة</option><option>فلفل</option>
+<option>خيار</option><option>فراولة</option><option>موالح</option>
+<option>مانجو</option><option>عنب</option><option>محصول آخر</option>
+</select>
+<label>صورة النبات</label>
+<input type="file" accept="image/*" id="plantImage">
+<label>وصف الأعراض</label>
+<textarea id="symptoms" rows="4" placeholder="مثلاً: اصفرار الأوراق وظهور بقع بنية..."></textarea>
+<button onclick="diagnose()">إرسال بيانات الحالة</button>
+<div id="diagnosisResult"></div>
+<p class="small">هذه النسخة تسجل بيانات الحالة فقط. التشخيص الآلي بالصور يحتاج ربط خدمة ذكاء اصطناعي متخصصة.</p>
+</section>
+
+<section class="section" id="crops">
+<button class="back" onclick="home()">← الرئيسية</button>
+<h2>🌾 دليل المحاصيل الزراعية</h2>
+<div class="item">🍅 الطماطم — النمو، التسميد، الري والأمراض الشائعة.</div>
+<div class="item">🥔 البطاطس — الزراعة والترديم واللفحة.</div>
+<div class="item">🌾 القمح — مواعيد الزراعة والتغذية والصدأ.</div>
+<div class="item">🌽 الذرة — التسميد والري والآفات.</div>
+<div class="item">🍚 الأرز — إدارة المياه والتغذية.</div>
+<div class="item">🍇 العنب — التقليم والأمراض والإنتاج.</div>
+<div class="item">🥭 المانجو والموالح والفراولة والخيار والفلفل.</div>
+</section>
+
+<section class="section" id="mushroom">
+<button class="back" onclick="home()">← الرئيسية</button>
+<h2>🍄 مركز زراعة المشروم</h2>
+<div class="item">
+<h3>🍄 الأجاريكس (Agaricus bisporus)</h3>
+- تجهيز الكمبوست والتخمير.<br>
+- البسترة والتبريد والتلقيح.<br>
+- نمو الميسيليوم والتغطية بالبيتموس.<br>
+- التحفيز وتكوين البراعم وجمع المحصول.
+</div>
+<div class="item">
+<h3>🍄 المشروم المحاري (Pleurotus ostreatus)</h3>
+- تجهيز القش والبيئة الزراعية.<br>
+- البسترة والتلقيح.<br>
+- التحضين ونمو الميسيليوم.<br>
+- الإثمار والتهوية والحصاد.
+</div>
+<div class="item">
+<h3>🔬 مشكلات وأمراض المشروم</h3>
+التريكوديرما، الكوب ويب، البقعة البكتيرية، الفقاعات الجافة والرطبة، الذباب والأكاروس.
+</div>
+<div class="item">
+<h3>📊 حساب إنتاج المشروم</h3>
+احسب كمية الإنتاج والتكاليف والعائد المتوقع من الدورة.
+</div>
+</section>
+
+<section class="section" id="pests">
+<button class="back" onclick="home()">← الرئيسية</button>
+<h2>🐛 الآفات والحشرات</h2>
+<div class="item">المن والذبابة البيضاء والتربس.</div>
+<div class="item">دودة ورق القطن ودودة ثمار الطماطم.</div>
+<div class="item">العناكب والأكاروسات والنيماتودا.</div>
+<p>سيتم إضافة قاعدة بيانات تفصيلية لدورة حياة الآفات وأعراض الإصابة وطرق المكافحة المتكاملة.</p>
+</section>
+
+<section class="section" id="fertilizers">
+<button class="back" onclick="home()">← الرئيسية</button>
+<h2>🧪 الأسمدة والتغذية النباتية</h2>
+<div class="item">العناصر الكبرى: N - P - K.</div>
+<div class="item">العناصر الثانوية: الكالسيوم والماغنسيوم والكبريت.</div>
+<div class="item">العناصر الصغرى: الحديد والزنك والمنجنيز والنحاس والبورون والموليبدينوم.</div>
+<p>شرح أعراض نقص العناصر وطرق التسميد والإضافة.</p>
+</section>
+
+<section class="section" id="calculator">
+<button class="back" onclick="home()">← الرئيسية</button>
+<h2>🧮 حاسبة إنتاج المشروم</h2>
+<label>كمية الكمبوست بالكيلوجرام</label>
+<input type="number" id="compost" placeholder="مثلاً 1000">
+<label>نسبة الإنتاج المتوقعة من وزن الكمبوست %</label>
+<input type="number" id="yieldRate" value="20">
+<button onclick="calculate()">احسب الإنتاج المتوقع</button>
+<div id="calcResult"></div>
+</section>
+
+</main>
+
+<footer>
+طبيب أرضك © 2026<br>
+المعرفة الزراعية في خدمة المزارع
+</footer>
+
+<script>
+function show(id){
+document.getElementById('welcome').style.display='none';
+document.getElementById('menu').style.display='none';
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+window.scrollTo(0,0);
+}
+function home(){
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById('welcome').style.display='block';
+document.getElementById('menu').style.display='grid';
+window.scrollTo(0,0);
+}
+function diagnose(){
+let crop=document.getElementById('crop').value;
+let symptoms=document.getElementById('symptoms').value;
+let file=document.getElementById('plantImage').files[0];
+if(!symptoms && !file){alert('من فضلك أدخل الأعراض أو اختر صورة');return;}
+document.getElementById('diagnosisResult').innerHTML=
+'<div class="item"><strong>تم تسجيل الحالة بنجاح مبدئياً</strong><br>المحصول: '+crop+
+'<br>الأعراض: '+(symptoms||'لم يتم إدخال وصف')+
+'<br>الصورة: '+(file?'تم اختيار صورة':'لا توجد صورة')+
+'<br><br>الخطوة التالية: ربط نظام الذكاء الاصطناعي لتحليل الحالة.</div>';
+}
+function calculate(){
+let c=Number(document.getElementById('compost').value);
+let r=Number(document.getElementById('yieldRate').value);
+if(c<=0||r<=0){alert('أدخل أرقاماً صحيحة');return;}
+document.getElementById('calcResult').innerHTML=
+'<div class="item">الإنتاج المتوقع حسابياً: <strong>'+(c*r/100).toFixed(1)+' كجم</strong><br><small>تقدير افتراضي يعتمد على نسبة الإنتاج التي أدخلتها، وليس ضماناً للمحصول.</small></div>';
+}
+</script>
+</body>
+</html>
