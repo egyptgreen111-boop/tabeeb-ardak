@@ -165,16 +165,74 @@ document.getElementById('welcome').style.display='block';
 document.getElementById('menu').style.display='grid';
 window.scrollTo(0,0);
 }
-function diagnose(){
-let crop=document.getElementById('crop').value;
-let symptoms=document.getElementById('symptoms').value;
-let file=document.getElementById('plantImage').files[0];
-if(!symptoms && !file){alert('من فضلك أدخل الأعراض أو اختر صورة');return;}
-document.getElementById('diagnosisResult').innerHTML=
-'<div class="item"><strong>تم تسجيل الحالة بنجاح مبدئياً</strong><br>المحصول: '+crop+
-'<br>الأعراض: '+(symptoms||'لم يتم إدخال وصف')+
-'<br>الصورة: '+(file?'تم اختيار صورة':'لا توجد صورة')+
-'<br><br>الخطوة التالية: ربط نظام الذكاء الاصطناعي لتحليل الحالة.</div>';
+async function diagnose(){
+    const crop = document.getElementById('crop').value;
+    const symptoms = document.getElementById('symptoms').value;
+    const file = document.getElementById('plantImage').files[0];
+    const result = document.getElementById('diagnosisResult');
+
+    if(!symptoms && !file){
+        alert('من فضلك اكتب الأعراض أو اختر صورة');
+        return;
+    }
+
+    result.innerHTML = '<div class="item">⏳ جاري تحليل الحالة... انتظر قليلاً</div>';
+
+    try {
+        let imageBase64 = '';
+        let mimeType = '';
+
+        if(file){
+            if(file.size > 4 * 1024 * 1024){
+                throw new Error('حجم الصورة كبير. اختر صورة أقل من 4 ميجابايت.');
+            }
+
+            mimeType = file.type;
+
+            imageBase64 = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = () => reject(new Error('تعذر قراءة الصورة'));
+                reader.readAsDataURL(file);
+            });
+        }
+
+        const response = await fetch(
+            'https://soft-pine-fedf.egyptgreen111.workers.dev',
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    crop: crop,
+                    symptoms: symptoms,
+                    imageBase64: imageBase64,
+                    mimeType: mimeType
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if(!response.ok || !data.success){
+            throw new Error(data.error || 'حدث خطأ أثناء التشخيص');
+        }
+
+        result.innerHTML = `
+            <div class="item">
+                <strong>🌱 نتيجة تحليل طبيب أرضك</strong>
+                <p style="white-space:pre-wrap">${data.diagnosis}</p>
+                <small>التشخيص احتمالي ويحتاج التأكد ميدانياً قبل استخدام أي مبيد أو علاج.</small>
+            </div>
+        `;
+
+    } catch(error) {
+        result.innerHTML = `
+            <div class="item">
+                <strong>⚠️ تعذر إتمام التشخيص</strong>
+                <p>${error.message}</p>
+            </div>
+        `;
+    }
 }
 function calculate(){
 let c=Number(document.getElementById('compost').value);
