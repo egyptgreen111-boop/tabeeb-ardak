@@ -214,7 +214,7 @@ async function diagnose(){
         const data = await response.json();
 
         if(!response.ok || !data.success){
-            throw new Error(data.error || 'حدث خطأ أثناء التشخيص');
+            throw new Error(data.details || data.error || 'حدث خطأ أثناء التشخيص');
         }
 
         result.innerHTML = `
