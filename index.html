@@ -74,6 +74,11 @@ margin-top:10px;
 <div class="card" onclick="show('pests')"><div class="emoji">🐛</div><h3>الآفات والحشرات</h3><p>التعرف على الآفات ومكافحتها</p></div>
 <div class="card" onclick="show('fertilizers')"><div class="emoji">🧪</div><h3>الأسمدة والتغذية</h3><p>العناصر الغذائية للنبات</p></div>
 <div class="card" onclick="show('calculator')"><div class="emoji">🧮</div><h3>الحاسبات الزراعية</h3><p>حسابات الإنتاج والتكاليف</p></div>
+<div class="card" onclick="show('market')">
+    <div class="emoji">📈</div>
+    <h3>البورصة الزراعية المصرية</h3>
+    <p>أسعار المحاصيل والمشروم في مصر</p>
+</div>
 </div>
 
 <section class="section" id="diagnosis">
@@ -158,6 +163,103 @@ margin-top:10px;
 <div class="item">العناصر الثانوية: الكالسيوم والماغنسيوم والكبريت.</div>
 <div class="item">العناصر الصغرى: الحديد والزنك والمنجنيز والنحاس والبورون والموليبدينوم.</div>
 <p>شرح أعراض نقص العناصر وطرق التسميد والإضافة.</p>
+</section>
+<section class="section" id="market">
+<button class="back" onclick="home()">← الرئيسية</button>
+
+<h2>📈 البورصة الزراعية المصرية</h2>
+<p>تابع أسعار المحاصيل الزراعية والمشروم في الأسواق المصرية.</p>
+
+<div class="item">
+    <strong>🇪🇬 نطاق التغطية</strong>
+    <p>محافظات مصر والأسواق الزراعية المختلفة.</p>
+</div>
+
+<label>نوع المنتجات</label>
+<select id="marketCategory" onchange="updateProducts()">
+    <option value="all">جميع المنتجات</option>
+    <option value="crops">المحاصيل الزراعية</option>
+    <option value="mushroom">المشروم</option>
+</select>
+
+<label>المحافظة</label>
+<select id="marketRegion">
+    <option value="all">جميع المحافظات</option>
+    <option>الشرقية</option>
+    <option>القاهرة</option>
+    <option>الجيزة</option>
+    <option>الإسكندرية</option>
+    <option>الدقهلية</option>
+    <option>الغربية</option>
+    <option>المنوفية</option>
+    <option>البحيرة</option>
+    <option>كفر الشيخ</option>
+    <option>دمياط</option>
+    <option>بورسعيد</option>
+    <option>الإسماعيلية</option>
+    <option>السويس</option>
+    <option>شمال سيناء</option>
+    <option>جنوب سيناء</option>
+    <option>القليوبية</option>
+    <option>بني سويف</option>
+    <option>الفيوم</option>
+    <option>المنيا</option>
+    <option>أسيوط</option>
+    <option>سوهاج</option>
+    <option>قنا</option>
+    <option>الأقصر</option>
+    <option>أسوان</option>
+    <option>البحر الأحمر</option>
+    <option>الوادي الجديد</option>
+    <option>مطروح</option>
+</select>
+
+<label>المحصول أو المنتج</label>
+<select id="marketProduct">
+    <option value="all">كل المنتجات</option>
+    <optgroup label="المحاصيل الزراعية">
+        <option>طماطم</option>
+        <option>بطاطس</option>
+        <option>بصل</option>
+        <option>ثوم</option>
+        <option>قمح</option>
+        <option>أرز</option>
+        <option>ذرة</option>
+        <option>فلفل</option>
+        <option>خيار</option>
+        <option>فراولة</option>
+        <option>مانجو</option>
+        <option>عنب</option>
+        <option>برتقال</option>
+        <option>ليمون</option>
+    </optgroup>
+    <optgroup label="المشروم">
+        <option>المشروم المحاري</option>
+        <option>مشروم الأجاريكس</option>
+        <option>مشروم شيتاكي</option>
+        <option>مشروم كينج أويستر</option>
+    </optgroup>
+</select>
+
+<button onclick="filterMarket()">بحث عن الأسعار</button>
+
+<div id="marketResults">
+    <div class="item">
+        <strong>📊 بيانات الأسعار</strong>
+        <p>لم يتم ربط مصادر الأسعار حتى الآن.</p>
+        <p>سيتم عرض سعر المزرعة والجملة والتجزئة عند توفر بيانات موثوقة.</p>
+    </div>
+</div>
+
+<div class="item">
+    <strong>ℹ️ أنواع الأسعار التي ستظهر</strong>
+    <p>🏡 سعر باب المزرعة</p>
+    <p>📦 سعر الجملة</p>
+    <p>🛒 سعر التجزئة</p>
+    <p>📅 تاريخ ومصدر آخر تحديث</p>
+</div>
+
+<p class="small">تنبيه: لا توجد أسعار فعلية معروضة حالياً. لن يتم نشر أي سعر دون تحديد مصدره وتاريخ جمعه.</p>
 </section>
 
 <section class="section" id="calculator">
@@ -367,6 +469,56 @@ let r=Number(document.getElementById('yieldRate').value);
 if(c<=0||r<=0){alert('أدخل أرقاماً صحيحة');return;}
 document.getElementById('calcResult').innerHTML=
 '<div class="item">الإنتاج المتوقع حسابياً: <strong>'+(c*r/100).toFixed(1)+' كجم</strong><br><small>تقدير افتراضي يعتمد على نسبة الإنتاج التي أدخلتها، وليس ضماناً للمحصول.</small></div>';
+}
+function updateProducts(){
+    const category = document.getElementById('marketCategory').value;
+    const product = document.getElementById('marketProduct');
+
+    product.innerHTML = '<option value="all">كل المنتجات</option>';
+
+    let products = [];
+
+    if(category === 'all' || category === 'crops'){
+        products.push(
+            'طماطم','بطاطس','بصل','ثوم','قمح','أرز',
+            'ذرة','فلفل','خيار','فراولة','مانجو','عنب',
+            'برتقال','ليمون'
+        );
+    }
+
+    if(category === 'all' || category === 'mushroom'){
+        products.push(
+            'المشروم المحاري',
+            'مشروم الأجاريكس',
+            'مشروم شيتاكي',
+            'مشروم كينج أويستر'
+        );
+    }
+
+    products.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name;
+        option.textContent = name;
+        product.appendChild(option);
+    });
+}
+
+function filterMarket(){
+    const category = document.getElementById('marketCategory').value;
+    const region = document.getElementById('marketRegion').value;
+    const product = document.getElementById('marketProduct').value;
+
+    document.getElementById('marketResults').innerHTML = `
+        <div class="item">
+            <strong>🔎 طلب البحث</strong>
+            <p>القسم: ${category === 'all' ? 'جميع المنتجات' : category === 'crops' ? 'المحاصيل الزراعية' : 'المشروم'}</p>
+            <p>المحافظة: ${region}</p>
+            <p>المنتج: ${product === 'all' ? 'جميع المنتجات' : product}</p>
+            <hr>
+            <strong>⏳ في انتظار ربط قاعدة بيانات الأسعار</strong>
+            <p>لم يتم تحميل أسعار فعلية لهذا البحث بعد.</p>
+        </div>
+    `;
 }
 </script>
 </body>
