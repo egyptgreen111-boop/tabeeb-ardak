@@ -91,6 +91,13 @@ margin-top:10px;
 <input type="file" accept="image/*" id="plantImage">
 <label>وصف الأعراض</label>
 <textarea id="symptoms" rows="4" placeholder="مثلاً: اصفرار الأوراق وظهور بقع بنية..."></textarea>
+<div class="voice-box">
+    <strong>🎤 تحدث مع طبيب أرضك</strong>
+    <p>اضغط على الميكروفون واشرح مشكلة النبات بصوتك.</p>
+    <button type="button" onclick="startListening()">🎤 ابدأ الكلام</button>
+    <button type="button" onclick="stopListening()">⏹ إيقاف</button>
+    <div class="voice-status" id="voiceStatus">الميكروفون جاهز</div>
+</div>
 <button onclick="diagnose()">إرسال بيانات الحالة</button>
 <div id="diagnosisResult"></div>
 <p class="small">هذه النسخة تسجل بيانات الحالة فقط. التشخيص الآلي بالصور يحتاج ربط خدمة ذكاء اصطناعي متخصصة.</p>
