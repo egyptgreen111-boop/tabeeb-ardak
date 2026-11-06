@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -29,26 +30,11 @@ label{font-size:14px;font-weight:bold}
 .back{background:#e5f1e8;color:#176b43;margin-bottom:10px}
 footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 .small{font-size:12px;color:#718077}
-.voice-box{
-background:#edf7ef;
-border:1px solid #cfe5d3;
-border-radius:12px;
-padding:14px;
-margin:10px 0 15px;
-}
-.voice-box button{
-margin:4px 2px;
-}
-.voice-status{
-font-size:13px;
-color:#176b43;
-margin-top:8px;
-}
-.voice-read{
-background:#e5f1e8;
-color:#176b43;
-margin-top:10px;
-}
+.voice-box{background:#edf7ef;border:1px solid #cfe5d3;border-radius:12px;padding:14px;margin:10px 0 15px}
+.voice-box button{margin:4px 2px}
+.voice-status{font-size:13px;color:#176b43;margin-top:8px}
+.voice-read{background:#e5f1e8;color:#176b43;margin-top:10px}
+.market-note{background:#fff8e8;border:1px solid #f0dfb7;padding:12px;border-radius:10px;margin-top:12px;font-size:13px}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}
 </style>
 </head>
@@ -74,11 +60,7 @@ margin-top:10px;
 <div class="card" onclick="show('pests')"><div class="emoji">🐛</div><h3>الآفات والحشرات</h3><p>التعرف على الآفات ومكافحتها</p></div>
 <div class="card" onclick="show('fertilizers')"><div class="emoji">🧪</div><h3>الأسمدة والتغذية</h3><p>العناصر الغذائية للنبات</p></div>
 <div class="card" onclick="show('calculator')"><div class="emoji">🧮</div><h3>الحاسبات الزراعية</h3><p>حسابات الإنتاج والتكاليف</p></div>
-<div class="card" onclick="show('market')">
-    <div class="emoji">📈</div>
-    <h3>البورصة الزراعية المصرية</h3>
-    <p>أسعار المحاصيل والمشروم في مصر</p>
-</div>
+<div class="card" onclick="show('market')"><div class="emoji">📈</div><h3>البورصة الزراعية المصرية</h3><p>أسعار المحاصيل والمشروم في مصر</p></div>
 </div>
 
 <section class="section" id="diagnosis">
@@ -97,15 +79,15 @@ margin-top:10px;
 <label>وصف الأعراض</label>
 <textarea id="symptoms" rows="4" placeholder="مثلاً: اصفرار الأوراق وظهور بقع بنية..."></textarea>
 <div class="voice-box">
-    <strong>🎤 تحدث مع طبيب أرضك</strong>
-    <p>اضغط على الميكروفون واشرح مشكلة النبات بصوتك.</p>
-    <button type="button" onclick="startListening()">🎤 ابدأ الكلام</button>
-    <button type="button" onclick="stopListening()">⏹ إيقاف</button>
-    <div class="voice-status" id="voiceStatus">الميكروفون جاهز</div>
+<strong>🎤 تحدث مع طبيب أرضك</strong>
+<p>اضغط على الميكروفون واشرح مشكلة النبات بصوتك.</p>
+<button type="button" onclick="startListening()">🎤 ابدأ الكلام</button>
+<button type="button" onclick="stopListening()">⏹ إيقاف</button>
+<div class="voice-status" id="voiceStatus">الميكروفون جاهز</div>
 </div>
 <button onclick="diagnose()">إرسال بيانات الحالة</button>
 <div id="diagnosisResult"></div>
-<p class="small">هذه النسخة تسجل بيانات الحالة فقط. التشخيص الآلي بالصور يحتاج ربط خدمة ذكاء اصطناعي متخصصة.</p>
+<p class="small">التشخيص الآلي يحتاج اتصالاً بخدمة الذكاء الاصطناعي.</p>
 </section>
 
 <section class="section" id="crops">
@@ -164,102 +146,76 @@ margin-top:10px;
 <div class="item">العناصر الصغرى: الحديد والزنك والمنجنيز والنحاس والبورون والموليبدينوم.</div>
 <p>شرح أعراض نقص العناصر وطرق التسميد والإضافة.</p>
 </section>
+
 <section class="section" id="market">
 <button class="back" onclick="home()">← الرئيسية</button>
-
 <h2>📈 البورصة الزراعية المصرية</h2>
-<p>تابع أسعار المحاصيل الزراعية والمشروم في الأسواق المصرية.</p>
+<p>تابع أسعار المحاصيل والمشروم في أسواق الجملة الرئيسية بمصر.</p>
 
 <div class="item">
-    <strong>🇪🇬 نطاق التغطية</strong>
-    <p>محافظات مصر والأسواق الزراعية المختلفة.</p>
+<strong>🇪🇬 أسواق الجملة الرئيسية</strong>
+<p>اختر السوق الذي تريد متابعة أسعاره.</p>
 </div>
 
 <label>نوع المنتجات</label>
 <select id="marketCategory" onchange="updateProducts()">
-    <option value="all">جميع المنتجات</option>
-    <option value="crops">المحاصيل الزراعية</option>
-    <option value="mushroom">المشروم</option>
+<option value="all">جميع المنتجات</option>
+<option value="crops">المحاصيل الزراعية</option>
+<option value="mushroom">المشروم</option>
 </select>
 
-<label>المحافظة</label>
+<label>سوق الجملة</label>
 <select id="marketRegion">
-    <option value="all">جميع المحافظات</option>
-    <option>الشرقية</option>
-    <option>القاهرة</option>
-    <option>الجيزة</option>
-    <option>الإسكندرية</option>
-    <option>الدقهلية</option>
-    <option>الغربية</option>
-    <option>المنوفية</option>
-    <option>البحيرة</option>
-    <option>كفر الشيخ</option>
-    <option>دمياط</option>
-    <option>بورسعيد</option>
-    <option>الإسماعيلية</option>
-    <option>السويس</option>
-    <option>شمال سيناء</option>
-    <option>جنوب سيناء</option>
-    <option>القليوبية</option>
-    <option>بني سويف</option>
-    <option>الفيوم</option>
-    <option>المنيا</option>
-    <option>أسيوط</option>
-    <option>سوهاج</option>
-    <option>قنا</option>
-    <option>الأقصر</option>
-    <option>أسوان</option>
-    <option>البحر الأحمر</option>
-    <option>الوادي الجديد</option>
-    <option>مطروح</option>
+<option value="all">جميع الأسواق</option>
+<option value="obour">سوق العبور – القاهرة الكبرى</option>
+<option value="october">سوق الجملة – 6 أكتوبر</option>
+<option value="hadra">سوق الحضرة – الإسكندرية</option>
+<option value="mansoura">سوق الجملة – المنصورة</option>
+<option value="mostakbal">سوق المستقبل – الإسماعيلية</option>
+<option value="portsaid">سوق الجملة – بورسعيد</option>
+<option value="arab">سوق عرب المدابغ – أسيوط</option>
+<option value="luxor">سوق الحبيل – الأقصر</option>
 </select>
 
 <label>المحصول أو المنتج</label>
 <select id="marketProduct">
-    <option value="all">كل المنتجات</option>
-    <optgroup label="المحاصيل الزراعية">
-        <option>طماطم</option>
-        <option>بطاطس</option>
-        <option>بصل</option>
-        <option>ثوم</option>
-        <option>قمح</option>
-        <option>أرز</option>
-        <option>ذرة</option>
-        <option>فلفل</option>
-        <option>خيار</option>
-        <option>فراولة</option>
-        <option>مانجو</option>
-        <option>عنب</option>
-        <option>برتقال</option>
-        <option>ليمون</option>
-    </optgroup>
-    <optgroup label="المشروم">
-        <option>المشروم المحاري</option>
-        <option>مشروم الأجاريكس</option>
-        <option>مشروم شيتاكي</option>
-        <option>مشروم كينج أويستر</option>
-    </optgroup>
+<option value="all">كل المنتجات</option>
+<optgroup label="المحاصيل الزراعية">
+<option>طماطم</option><option>بطاطس</option><option>بصل</option>
+<option>ثوم</option><option>قمح</option><option>أرز</option>
+<option>ذرة</option><option>فلفل</option><option>خيار</option>
+<option>فراولة</option><option>مانجو</option><option>عنب</option>
+<option>برتقال</option><option>ليمون</option>
+</optgroup>
+<optgroup label="المشروم">
+<option>المشروم المحاري</option>
+<option>مشروم الأجاريكس</option>
+<option>مشروم شيتاكي</option>
+<option>مشروم كينج أويستر</option>
+</optgroup>
 </select>
 
 <button onclick="filterMarket()">بحث عن الأسعار</button>
 
 <div id="marketResults">
-    <div class="item">
-        <strong>📊 بيانات الأسعار</strong>
-        <p>لم يتم ربط مصادر الأسعار حتى الآن.</p>
-        <p>سيتم عرض سعر المزرعة والجملة والتجزئة عند توفر بيانات موثوقة.</p>
-    </div>
+<div class="item">
+<strong>📊 بيانات الأسعار</strong>
+<p>اختر السوق والمحصول لعرض البيانات المتاحة.</p>
+</div>
 </div>
 
 <div class="item">
-    <strong>ℹ️ أنواع الأسعار التي ستظهر</strong>
-    <p>🏡 سعر باب المزرعة</p>
-    <p>📦 سعر الجملة</p>
-    <p>🛒 سعر التجزئة</p>
-    <p>📅 تاريخ ومصدر آخر تحديث</p>
+<strong>ℹ️ بيانات الأسعار التي ستظهر</strong>
+<p>📦 سعر الجملة</p>
+<p>📉 أقل سعر</p>
+<p>📈 أعلى سعر</p>
+<p>📅 تاريخ التحديث</p>
+<p>🔎 مصدر السعر</p>
 </div>
 
-<p class="small">تنبيه: لا توجد أسعار فعلية معروضة حالياً. لن يتم نشر أي سعر دون تحديد مصدره وتاريخ جمعه.</p>
+<div class="market-note">
+لن يتم عرض سعر غير موثق. سعر سوق العبور لا يمثل تلقائياً أسعار بقية الأسواق. أسعار المشروم ستحتاج إلى مصدر مستقل موثوق.
+</div>
 </section>
 
 <section class="section" id="calculator">
@@ -288,237 +244,245 @@ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 document.getElementById(id).classList.add('active');
 window.scrollTo(0,0);
 }
+
 function home(){
 document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
 document.getElementById('welcome').style.display='block';
 document.getElementById('menu').style.display='grid';
 window.scrollTo(0,0);
 }
+
 async function diagnose(){
-    const crop = document.getElementById('crop').value;
-    const symptoms = document.getElementById('symptoms').value;
-    const file = document.getElementById('plantImage').files[0];
-    const result = document.getElementById('diagnosisResult');
+const crop=document.getElementById('crop').value;
+const symptoms=document.getElementById('symptoms').value;
+const file=document.getElementById('plantImage').files[0];
+const result=document.getElementById('diagnosisResult');
 
-    if(!symptoms && !file){
-        alert('من فضلك اكتب الأعراض أو اختر صورة');
-        return;
-    }
-
-    result.innerHTML = '<div class="item">⏳ جاري تحليل الحالة... انتظر قليلاً</div>';
-
-    try {
-        let imageBase64 = '';
-        let mimeType = '';
-
-        if(file){
-            if(file.size > 4 * 1024 * 1024){
-                throw new Error('حجم الصورة كبير. اختر صورة أقل من 4 ميجابايت.');
-            }
-
-            mimeType = file.type;
-
-            imageBase64 = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result.split(',')[1]);
-                reader.onerror = () => reject(new Error('تعذر قراءة الصورة'));
-                reader.readAsDataURL(file);
-            });
-        }
-
-        const response = await fetch(
-            'https://soft-pine-fedf.egyptgreen111.workers.dev',
-            {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    crop: crop,
-                    symptoms: symptoms,
-                    imageBase64: imageBase64,
-                    mimeType: mimeType
-                })
-            }
-        );
-
-        const data = await response.json();
-
-        if(!response.ok || !data.success){
-            throw new Error(data.details || data.error || 'حدث خطأ أثناء التشخيص');
-        }
-
-     result.innerHTML = `
-    <div class="item">
-        <strong>🌱 نتيجة تحليل طبيب أرضك</strong>
-        <p style="white-space:pre-wrap">${data.diagnosis}</p>
-
-        <button type="button" onclick="speakDiagnosis()">
-            🔊 اسمع التشخيص
-        </button>
-
-        <button type="button" onclick="stopSpeaking()" style="background:#777">
-            ⏹ إيقاف الصوت
-        </button>
-
-        <small>التشخيص احتمالي ويحتاج التأكد ميدانياً قبل استخدام أي مبيد أو علاج.</small>
-    </div>
-`;
-
-    } catch(error) {
-        result.innerHTML = `
-            <div class="item">
-                <strong>⚠️ تعذر إتمام التشخيص</strong>
-                <p>${error.message}</p>
-            </div>
-        `;
-    }
+if(!symptoms && !file){
+alert('من فضلك اكتب الأعراض أو اختر صورة');
+return;
 }
+
+result.innerHTML='<div class="item">⏳ جاري تحليل الحالة... انتظر قليلاً</div>';
+
+try{
+let imageBase64='';
+let mimeType='';
+
+if(file){
+if(file.size>4*1024*1024){
+throw new Error('حجم الصورة كبير. اختر صورة أقل من 4 ميجابايت.');
+}
+mimeType=file.type;
+imageBase64=await new Promise((resolve,reject)=>{
+const reader=new FileReader();
+reader.onload=()=>resolve(reader.result.split(',')[1]);
+reader.onerror=()=>reject(new Error('تعذر قراءة الصورة'));
+reader.readAsDataURL(file);
+});
+}
+
+const response=await fetch('https://soft-pine-fedf.egyptgreen111.workers.dev',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({
+crop:crop,
+symptoms:symptoms,
+imageBase64:imageBase64,
+mimeType:mimeType
+})
+});
+
+const data=await response.json();
+
+if(!response.ok || !data.success){
+throw new Error(data.details || data.error || 'حدث خطأ أثناء التشخيص');
+}
+
+const safeDiagnosis=document.createElement('p');
+safeDiagnosis.style.whiteSpace='pre-wrap';
+safeDiagnosis.textContent=data.diagnosis || 'لم تصل نتيجة التشخيص.';
+
+result.innerHTML=`
+<div class="item">
+<strong>🌱 نتيجة تحليل طبيب أرضك</strong>
+<div id="diagnosisText"></div>
+<button type="button" onclick="speakDiagnosis()">🔊 اسمع التشخيص</button>
+<button type="button" onclick="stopSpeaking()" style="background:#777">⏹ إيقاف الصوت</button>
+<small>التشخيص احتمالي ويحتاج التأكد ميدانياً قبل استخدام أي مبيد أو علاج.</small>
+</div>`;
+document.getElementById('diagnosisText').appendChild(safeDiagnosis);
+
+}catch(error){
+result.innerHTML=`<div class="item"><strong>⚠️ تعذر إتمام التشخيص</strong><p>${escapeHTML(error.message)}</p></div>`;
+}
+}
+
+function escapeHTML(value){
+return String(value).replace(/[&<>"']/g,char=>({
+'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[char]));
+}
+
 let recognition;
 
 function startListening(){
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const SpeechRecognition=window.SpeechRecognition || window.webkitSpeechRecognition;
+if(!SpeechRecognition){
+document.getElementById('voiceStatus').textContent='المتصفح لا يدعم الميكروفون. جرّب Google Chrome.';
+return;
+}
+if(recognition) recognition.stop();
+recognition=new SpeechRecognition();
+recognition.lang='ar-EG';
+recognition.continuous=true;
+recognition.interimResults=true;
 
-    if(!SpeechRecognition){
-        document.getElementById('voiceStatus').textContent =
-        'المتصفح لا يدعم الميكروفون. جرّب Google Chrome.';
-        return;
-    }
+recognition.onstart=()=>document.getElementById('voiceStatus').textContent='🎤 أنا بسمعك.. اتكلم الآن';
 
-    if(recognition){
-        recognition.stop();
-    }
+recognition.onresult=function(event){
+let finalText='';
+let interimText='';
+for(let i=event.resultIndex;i<event.results.length;i++){
+if(event.results[i].isFinal) finalText+=event.results[i][0].transcript+' ';
+else interimText+=event.results[i][0].transcript;
+}
+if(finalText){
+const symptoms=document.getElementById('symptoms');
+symptoms.value+=(symptoms.value?' ':'')+finalText.trim();
+}
+document.getElementById('voiceStatus').textContent=interimText?'أسمع: '+interimText:'تم تسجيل الكلام';
+};
 
-    recognition = new SpeechRecognition();
-    recognition.lang = 'ar-EG';
-    recognition.continuous = true;
-    recognition.interimResults = true;
-
-    recognition.onstart = function(){
-        document.getElementById('voiceStatus').textContent =
-        '🎤 أنا بسمعك.. اتكلم الآن';
-    };
-
-    recognition.onresult = function(event){
-        let finalText = '';
-        let interimText = '';
-
-        for(let i = event.resultIndex; i < event.results.length; i++){
-            if(event.results[i].isFinal){
-                finalText += event.results[i][0].transcript + ' ';
-            } else {
-                interimText += event.results[i][0].transcript;
-            }
-        }
-
-        if(finalText){
-            const symptoms = document.getElementById('symptoms');
-            symptoms.value += (symptoms.value ? ' ' : '') + finalText.trim();
-        }
-
-        document.getElementById('voiceStatus').textContent =
-        interimText ? 'أسمع: ' + interimText : 'تم تسجيل الكلام';
-    };
-
-    recognition.onerror = function(event){
-        document.getElementById('voiceStatus').textContent =
-        'حدثت مشكلة في الميكروفون: ' + event.error;
-    };
-
-    recognition.onend = function(){
-        document.getElementById('voiceStatus').textContent =
-        'انتهى التسجيل. يمكنك مراجعة الكلام قبل إرساله.';
-    };
-
-    recognition.start();
+recognition.onerror=event=>{
+document.getElementById('voiceStatus').textContent='حدثت مشكلة في الميكروفون: '+event.error;
+};
+recognition.onend=()=>{
+document.getElementById('voiceStatus').textContent='انتهى التسجيل. يمكنك مراجعة الكلام قبل إرساله.';
+};
+recognition.start();
 }
 
 function stopListening(){
-    if(recognition){
-        recognition.stop();
-    }
+if(recognition) recognition.stop();
 }
+
 function speakDiagnosis(){
-    const result = document.getElementById('diagnosisResult');
-    const text = result.innerText;
-
-    if(!text){
-        alert('لا توجد نتيجة لتشغيلها');
-        return;
-    }
-
-    if(!window.speechSynthesis){
-        alert('متصفحك لا يدعم تشغيل الصوت');
-        return;
-    }
-
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ar-EG';
-    utterance.rate = 0.9;
-    utterance.pitch = 1;
-
-    window.speechSynthesis.speak(utterance);
+const text=document.getElementById('diagnosisText')?.innerText;
+if(!text){
+alert('لا توجد نتيجة لتشغيلها');
+return;
+}
+if(!window.speechSynthesis){
+alert('متصفحك لا يدعم تشغيل الصوت');
+return;
+}
+window.speechSynthesis.cancel();
+const utterance=new SpeechSynthesisUtterance(text);
+utterance.lang='ar-EG';
+utterance.rate=0.9;
+utterance.pitch=1;
+window.speechSynthesis.speak(utterance);
 }
 
 function stopSpeaking(){
-    window.speechSynthesis.cancel();
+if(window.speechSynthesis) window.speechSynthesis.cancel();
 }
+
 function calculate(){
-let c=Number(document.getElementById('compost').value);
-let r=Number(document.getElementById('yieldRate').value);
-if(c<=0||r<=0){alert('أدخل أرقاماً صحيحة');return;}
+const c=Number(document.getElementById('compost').value);
+const r=Number(document.getElementById('yieldRate').value);
+if(c<=0 || r<=0 || r>100){
+alert('أدخل كمية صحيحة ونسبة إنتاج أكبر من صفر ولا تتجاوز 100%');
+return;
+}
 document.getElementById('calcResult').innerHTML=
 '<div class="item">الإنتاج المتوقع حسابياً: <strong>'+(c*r/100).toFixed(1)+' كجم</strong><br><small>تقدير افتراضي يعتمد على نسبة الإنتاج التي أدخلتها، وليس ضماناً للمحصول.</small></div>';
 }
+
 function updateProducts(){
-    const category = document.getElementById('marketCategory').value;
-    const product = document.getElementById('marketProduct');
+const category=document.getElementById('marketCategory').value;
+const product=document.getElementById('marketProduct');
+product.innerHTML='<option value="all">كل المنتجات</option>';
 
-    product.innerHTML = '<option value="all">كل المنتجات</option>';
+const crops=['طماطم','بطاطس','بصل','ثوم','قمح','أرز','ذرة','فلفل','خيار','فراولة','مانجو','عنب','برتقال','ليمون'];
+const mushrooms=['المشروم المحاري','مشروم الأجاريكس','مشروم شيتاكي','مشروم كينج أويستر'];
 
-    let products = [];
+function addGroup(label,items){
+const group=document.createElement('optgroup');
+group.label=label;
+items.forEach(name=>{
+const option=document.createElement('option');
+option.value=name;
+option.textContent=name;
+group.appendChild(option);
+});
+product.appendChild(group);
+}
 
-    if(category === 'all' || category === 'crops'){
-        products.push(
-            'طماطم','بطاطس','بصل','ثوم','قمح','أرز',
-            'ذرة','فلفل','خيار','فراولة','مانجو','عنب',
-            'برتقال','ليمون'
-        );
-    }
-
-    if(category === 'all' || category === 'mushroom'){
-        products.push(
-            'المشروم المحاري',
-            'مشروم الأجاريكس',
-            'مشروم شيتاكي',
-            'مشروم كينج أويستر'
-        );
-    }
-
-    products.forEach(name => {
-        const option = document.createElement('option');
-        option.value = name;
-        option.textContent = name;
-        product.appendChild(option);
-    });
+if(category==='all' || category==='crops') addGroup('المحاصيل الزراعية',crops);
+if(category==='all' || category==='mushroom') addGroup('المشروم',mushrooms);
 }
 
 function filterMarket(){
-    const category = document.getElementById('marketCategory').value;
-    const region = document.getElementById('marketRegion').value;
-    const product = document.getElementById('marketProduct').value;
+const category=document.getElementById('marketCategory').value;
+const market=document.getElementById('marketRegion').value;
+const product=document.getElementById('marketProduct').value;
 
-    document.getElementById('marketResults').innerHTML = `
-        <div class="item">
-            <strong>🔎 طلب البحث</strong>
-            <p>القسم: ${category === 'all' ? 'جميع المنتجات' : category === 'crops' ? 'المحاصيل الزراعية' : 'المشروم'}</p>
-            <p>المحافظة: ${region}</p>
-            <p>المنتج: ${product === 'all' ? 'جميع المنتجات' : product}</p>
-            <hr>
-            <strong>⏳ في انتظار ربط قاعدة بيانات الأسعار</strong>
-            <p>لم يتم تحميل أسعار فعلية لهذا البحث بعد.</p>
-        </div>
-    `;
+const markets={
+all:'جميع الأسواق',
+obour:'سوق العبور – القاهرة الكبرى',
+october:'سوق الجملة – 6 أكتوبر',
+hadra:'سوق الحضرة – الإسكندرية',
+mansoura:'سوق الجملة – المنصورة',
+mostakbal:'سوق المستقبل – الإسماعيلية',
+portsaid:'سوق الجملة – بورسعيد',
+arab:'سوق عرب المدابغ – أسيوط',
+luxor:'سوق الحبيل – الأقصر'
+};
+
+const categories={
+all:'جميع المنتجات',
+crops:'المحاصيل الزراعية',
+mushroom:'المشروم'
+};
+
+const results=document.getElementById('marketResults');
+results.replaceChildren();
+
+const box=document.createElement('div');
+box.className='item';
+
+const heading=document.createElement('strong');
+heading.textContent='🔎 تفاصيل البحث';
+box.appendChild(heading);
+
+[
+'السوق: '+(markets[market] || 'غير محدد'),
+'القسم: '+categories[category],
+'المنتج: '+(product==='all'?'كل المنتجات':product)
+].forEach(line=>{
+const p=document.createElement('p');
+p.textContent=line;
+box.appendChild(p);
+});
+
+const hr=document.createElement('hr');
+box.appendChild(hr);
+
+const status=document.createElement('strong');
+status.textContent='📊 حالة بيانات الأسعار';
+box.appendChild(status);
+
+const message=document.createElement('p');
+message.textContent='لم يتم ربط نشرة أسعار موثقة بهذا السوق حتى الآن.';
+box.appendChild(message);
+
+const note=document.createElement('p');
+note.textContent='لن نعرض أرقاماً تقديرية على أنها أسعار حقيقية.';
+box.appendChild(note);
+
+results.appendChild(box);
 }
 </script>
 </body>
