@@ -244,13 +244,22 @@ async function diagnose(){
             throw new Error(data.details || data.error || 'حدث خطأ أثناء التشخيص');
         }
 
-        result.innerHTML = `
-            <div class="item">
-                <strong>🌱 نتيجة تحليل طبيب أرضك</strong>
-                <p style="white-space:pre-wrap">${data.diagnosis}</p>
-                <small>التشخيص احتمالي ويحتاج التأكد ميدانياً قبل استخدام أي مبيد أو علاج.</small>
-            </div>
-        `;
+     result.innerHTML = `
+    <div class="item">
+        <strong>🌱 نتيجة تحليل طبيب أرضك</strong>
+        <p style="white-space:pre-wrap">${data.diagnosis}</p>
+
+        <button type="button" onclick="speakDiagnosis()">
+            🔊 اسمع التشخيص
+        </button>
+
+        <button type="button" onclick="stopSpeaking()" style="background:#777">
+            ⏹ إيقاف الصوت
+        </button>
+
+        <small>التشخيص احتمالي ويحتاج التأكد ميدانياً قبل استخدام أي مبيد أو علاج.</small>
+    </div>
+`;
 
     } catch(error) {
         result.innerHTML = `
