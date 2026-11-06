@@ -261,6 +261,97 @@ async function diagnose(){
         `;
     }
 }
+let recognition;
+
+function startListening(){
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+        document.getElementById('voiceStatus').textContent =
+        'المتصفح لا يدعم الميكروفون. جرّب Google Chrome.';
+        return;
+    }
+
+    if(recognition){
+        recognition.stop();
+    }
+
+    recognition = new SpeechRecognition();
+    recognition.lang = 'ar-EG';
+    recognition.continuous = true;
+    recognition.interimResults = true;
+
+    recognition.onstart = function(){
+        document.getElementById('voiceStatus').textContent =
+        '🎤 أنا بسمعك.. اتكلم الآن';
+    };
+
+    recognition.onresult = function(event){
+        let finalText = '';
+        let interimText = '';
+
+        for(let i = event.resultIndex; i < event.results.length; i++){
+            if(event.results[i].isFinal){
+                finalText += event.results[i][0].transcript + ' ';
+            } else {
+                interimText += event.results[i][0].transcript;
+            }
+        }
+
+        if(finalText){
+            const symptoms = document.getElementById('symptoms');
+            symptoms.value += (symptoms.value ? ' ' : '') + finalText.trim();
+        }
+
+        document.getElementById('voiceStatus').textContent =
+        interimText ? 'أسمع: ' + interimText : 'تم تسجيل الكلام';
+    };
+
+    recognition.onerror = function(event){
+        document.getElementById('voiceStatus').textContent =
+        'حدثت مشكلة في الميكروفون: ' + event.error;
+    };
+
+    recognition.onend = function(){
+        document.getElementById('voiceStatus').textContent =
+        'انتهى التسجيل. يمكنك مراجعة الكلام قبل إرساله.';
+    };
+
+    recognition.start();
+}
+
+function stopListening(){
+    if(recognition){
+        recognition.stop();
+    }
+}
+function speakDiagnosis(){
+    const result = document.getElementById('diagnosisResult');
+    const text = result.innerText;
+
+    if(!text){
+        alert('لا توجد نتيجة لتشغيلها');
+        return;
+    }
+
+    if(!window.speechSynthesis){
+        alert('متصفحك لا يدعم تشغيل الصوت');
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'ar-EG';
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeaking(){
+    window.speechSynthesis.cancel();
+}
 function calculate(){
 let c=Number(document.getElementById('compost').value);
 let r=Number(document.getElementById('yieldRate').value);
