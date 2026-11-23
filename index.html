@@ -36,6 +36,50 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 .voice-read{background:#e5f1e8;color:#176b43;margin-top:10px}
 .market-note{background:#fff8e8;border:1px solid #f0dfb7;padding:12px;border-radius:10px;margin-top:12px;font-size:13px}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}
+
+/* Professional agricultural marketplace */
+.trade-hero{display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(120deg,#104d34,#218354);color:#fff;padding:25px;border-radius:20px;margin:12px 0 18px;overflow:hidden}
+.trade-hero h2{color:#fff;font-size:25px;margin:10px 0}
+.trade-hero p{color:#e2f2e8;line-height:1.8;margin:0;max-width:540px}
+.trade-kicker{font-size:12px;background:#ffffff22;padding:7px 11px;border-radius:20px}
+.trade-hero-icon{font-size:65px;opacity:.95}
+.trade-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}
+.trade-primary,.trade-secondary{padding:12px 18px;border-radius:11px;font-weight:bold}
+.trade-primary{background:#f0a72e;color:#263626}
+.trade-secondary{background:#e7f2ea;color:#176b43}
+.trade-search{display:grid;grid-template-columns:1fr 220px;gap:10px;background:#f5f8f5;padding:12px;border-radius:14px}
+.trade-search input,.trade-search select{margin:0;background:#fff}
+.trade-categories{display:flex;gap:8px;overflow-x:auto;padding:14px 0}
+.trade-cat{white-space:nowrap;background:#f1f5f1;color:#385346;border:1px solid #e0e9e1;padding:10px 13px;border-radius:22px}
+.trade-cat.active{background:#176b43;color:white;border-color:#176b43}
+.trade-section-head{display:flex;justify-content:space-between;align-items:center;margin:14px 0}
+.trade-section-head h3{margin:0;color:#20352a}
+.trade-section-head p{margin:5px 0;color:#78867d;font-size:12px}
+.trade-count{font-size:12px;background:#eef5ef;padding:7px 10px;border-radius:20px;color:#176b43}
+.trade-products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.trade-product{border:1px solid #e5ece6;border-radius:15px;overflow:hidden;background:white;box-shadow:0 4px 14px #193b2410}
+.trade-product-art{height:145px;display:flex;align-items:center;justify-content:center;font-size:62px;background:linear-gradient(135deg,#eef6ee,#dcebdd)}
+.trade-product-info{padding:13px}
+.trade-tag{display:inline-block;font-size:11px;color:#176b43;background:#eaf4eb;border-radius:20px;padding:5px 8px;margin-bottom:8px}
+.trade-product h4{margin:0 0 8px;font-size:15px}
+.trade-product p{font-size:12px;color:#738078;line-height:1.7;margin:5px 0}
+.trade-price{font-size:17px;font-weight:bold;color:#176b43;margin:10px 0}
+.trade-product button{width:100%;margin-top:7px;background:#176b43}
+.trade-demo{font-size:10px;color:#9a6a1b;background:#fff5df;padding:5px 7px;border-radius:8px}
+.trade-account{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#f2f7f2;border-radius:15px;padding:16px;margin-top:20px}
+.trade-account p{margin:5px 0 0;color:#718077;font-size:12px}
+.trade-warning{background:#fff8e9;border:1px solid #f0dfb7;border-radius:13px;padding:13px;margin-top:14px;font-size:12px;line-height:1.8}
+.trade-warning p{margin:5px 0 0}
+.trade-modal{position:fixed;inset:0;background:#10251bd9;z-index:1000;display:flex;align-items:center;justify-content:center;padding:15px}
+.trade-modal-card{background:#fff;width:min(520px,100%);max-height:90vh;overflow:auto;border-radius:18px;padding:20px;position:relative}
+.trade-close{float:left;background:#edf3ee;color:#315b43;padding:7px 10px}
+.trade-modal-card h3{margin-top:6px;color:#176b43}
+.trade-modal-card label{display:block;margin-top:10px}
+.trade-modal-card button[type=submit]{width:100%;margin-top:10px}
+.trade-empty{grid-column:1/-1;padding:25px;text-align:center;background:#f5f8f5;border-radius:14px;color:#68786e}
+@media(max-width:700px){.trade-products{grid-template-columns:repeat(2,minmax(0,1fr))}.trade-search{grid-template-columns:1fr}.trade-hero{padding:19px}.trade-hero h2{font-size:20px}.trade-hero-icon{font-size:45px}}
+@media(max-width:430px){.trade-products{grid-template-columns:1fr}.trade-product-art{height:125px}.trade-account{align-items:flex-start;flex-direction:column}}
+
 </style>
 </head>
 <body>
@@ -47,15 +91,16 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 
 <main class="container">
 
+
 <div class="welcome" id="welcome">
 <h2>أهلاً بك في طبيب أرضك</h2>
-<p>اكتشف مشكلات محاصيلك، وتعلم طرق الزراعة الصحيحة، وتابع إنتاج المشروم.</p>
-<strong>معرفة زراعية تساعدك على اتخاذ القرار الصحيح.</strong>
+<p>التشخيص الزراعي، والتجارة الزراعية، ومتابعة أسعار السوق في مكان واحد.</p>
+<strong>من المزرعة إلى السوق المحلي والعالمي.</strong>
 </div>
 
 <div class="grid" id="menu">
-<div class="card" onclick="show('diagnosis')"><div class="emoji">📷</div><h3>التشخيص الزراعي</h3><p>تشخيص أمراض ومشكلات النبات بالصور والصوت</p></div>
-<div class="card" onclick="show('commercialMarket')"><div class="emoji">🤝</div><h3>السوق التجاري الزراعي</h3><p>بيع وشراء محلي واستيراد وتصدير</p></div>
+<div class="card" onclick="show('diagnosis')"><div class="emoji">📷</div><h3>التشخيص الزراعي</h3><p>حلّل أعراض النبات وارفع صورة للتشخيص</p></div>
+<div class="card" onclick="show('commercialMarket')"><div class="emoji">🛒</div><h3>السوق التجاري الزراعي</h3><p>بيع وشراء محاصيل ومستلزمات محلياً ودولياً</p></div>
 <div class="card" onclick="show('exchange')"><div class="emoji">📈</div><h3>البورصة الزراعية</h3><p>متابعة أسعار المحاصيل والمشروم</p></div>
 </div>
 
@@ -89,72 +134,65 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 
 <section class="section" id="commercialMarket">
 <button class="back" onclick="home()">← الرئيسية</button>
-<h2>🤝 السوق التجاري الزراعي</h2>
-<p>مساحة للتواصل التجاري بين المنتجين والتجار والمشترين داخل مصر وخارجها.</p>
-<div class="grid">
-<div class="card" onclick="showMarketPanel('localPanel')"><div class="emoji">🇪🇬</div><h3>السوق المحلي</h3><p>عرض وشراء المنتجات الزراعية</p></div>
-<div class="card" onclick="showMarketPanel('exportPanel')"><div class="emoji">🌍</div><h3>استيراد وتصدير</h3><p>فرص تجارة خارجية</p></div>
-<div class="card" onclick="showMarketPanel('requestsPanel')"><div class="emoji">📋</div><h3>طلبات شراء</h3><p>اعرض احتياجك من المنتجات</p></div>
-<div class="card" onclick="showMarketPanel('suppliesPanel')"><div class="emoji">🚜</div><h3>مستلزمات ومعدات</h3><p>معدات ومدخلات الإنتاج الزراعي</p></div>
-<div class="card" onclick="showMarketPanel('mushroomPanel')"><div class="emoji">🍄</div><h3>سوق المشروم</h3><p>بيع وشراء أنواع المشروم</p></div>
-<div class="card" onclick="showMarketPanel('accountPanel')"><div class="emoji">👤</div><h3>الحساب التجاري</h3><p>بيانات التاجر أو الشركة</p></div>
+
+<div class="trade-hero">
+  <div>
+    <span class="trade-kicker">طبيب أرضك • السوق التجاري</span>
+    <h2>سوقك الزراعي.. من أرضك للعالم</h2>
+    <p>اعرض منتجاتك، ابحث عن موردين، وتواصل مباشرة مع شركاء التجارة الزراعية.</p>
+  </div>
+  <div class="trade-hero-icon">🌾</div>
 </div>
-<div id="marketPanels">
-<div class="item" id="localPanel" style="display:none">
-<h3>🇪🇬 السوق المحلي</h3>
-<label>نوع العملية</label><select id="localAction"><option>عرض للبيع</option><option>طلب شراء</option></select>
-<label>اسم المنتج</label><input id="localProduct" placeholder="مثلاً: طماطم، بطاطس، قمح...">
-<label>الكمية</label><input id="localQuantity" placeholder="مثلاً: 5 طن">
-<label>المحافظة / مكان التسليم</label><input id="localLocation" placeholder="المحافظة والمدينة">
-<label>السعر المطلوب (اختياري)</label><input id="localPrice" placeholder="السعر بالجنيه">
-<label>رقم التواصل</label><input id="localPhone" type="tel" placeholder="رقم الهاتف">
-<button onclick="submitMarketListing('local')">تجهيز الإعلان</button>
+
+<div class="trade-actions">
+  <button class="trade-primary" onclick="openTradeForm('sell')">＋ أضف منتج للبيع</button>
+  <button class="trade-secondary" onclick="openTradeForm('buy')">＋ أضف طلب شراء</button>
 </div>
-<div class="item" id="exportPanel" style="display:none">
-<h3>🌍 الاستيراد والتصدير</h3>
-<label>نوع العملية</label><select id="tradeAction"><option>تصدير من مصر</option><option>استيراد إلى مصر</option></select>
-<label>المنتج</label><input id="tradeProduct" placeholder="اسم المنتج والمواصفات">
-<label>الكمية</label><input id="tradeQuantity" placeholder="الكمية والوحدة">
-<label>الدولة المستهدفة / بلد المنشأ</label><input id="tradeCountry" placeholder="اسم الدولة">
-<label>بيانات التواصل</label><input id="tradePhone" placeholder="رقم الهاتف أو البريد">
-<button onclick="submitMarketListing('trade')">تجهيز طلب التجارة</button>
+
+<div class="trade-search">
+  <input id="tradeSearch" type="search" placeholder="ابحث عن محصول، مشروم، سماد، أو معدة..." oninput="renderTradeListings()">
+  <select id="tradeArea" onchange="renderTradeListings()">
+    <option value="all">كل الأسواق</option>
+    <option value="local">السوق المحلي</option>
+    <option value="export">استيراد وتصدير</option>
+    <option value="mushroom">سوق المشروم</option>
+    <option value="supplies">مستلزمات ومعدات</option>
+    <option value="requests">طلبات شراء</option>
+  </select>
 </div>
-<div class="item" id="requestsPanel" style="display:none">
-<h3>📋 طلبات الشراء</h3>
-<label>ما المنتج الذي تبحث عنه؟</label><input id="requestProduct" placeholder="اسم المنتج والمواصفات">
-<label>الكمية المطلوبة</label><input id="requestQuantity" placeholder="الكمية">
-<label>مكان التسليم</label><input id="requestLocation" placeholder="المحافظة / الدولة">
-<label>رقم التواصل</label><input id="requestPhone" placeholder="رقم الهاتف">
-<button onclick="submitMarketListing('request')">تجهيز طلب الشراء</button>
+
+<div class="trade-categories">
+  <button class="trade-cat active" data-area="all" onclick="setTradeArea('all',this)">🌐 الكل</button>
+  <button class="trade-cat" data-area="local" onclick="setTradeArea('local',this)">🇪🇬 محلي</button>
+  <button class="trade-cat" data-area="export" onclick="setTradeArea('export',this)">🚢 استيراد وتصدير</button>
+  <button class="trade-cat" data-area="requests" onclick="setTradeArea('requests',this)">📋 طلبات شراء</button>
+  <button class="trade-cat" data-area="supplies" onclick="setTradeArea('supplies',this)">🚜 مستلزمات ومعدات</button>
+  <button class="trade-cat" data-area="mushroom" onclick="setTradeArea('mushroom',this)">🍄 سوق المشروم</button>
 </div>
-<div class="item" id="suppliesPanel" style="display:none">
-<h3>🚜 مستلزمات ومعدات زراعية</h3>
-<label>اسم المستلزم أو المعدة</label><input id="supplyProduct" placeholder="مثلاً: شبكات ري، جرار، بذور...">
-<label>الحالة</label><select id="supplyCondition"><option>جديد</option><option>مستعمل</option></select>
-<label>السعر ومكانه</label><input id="supplyDetails" placeholder="السعر والمحافظة">
-<label>رقم التواصل</label><input id="supplyPhone" placeholder="رقم الهاتف">
-<button onclick="submitMarketListing('supply')">تجهيز الإعلان</button>
+
+<div class="trade-section-head">
+  <div><h3>عروض السوق</h3><p>نماذج توضيحية لشكل الإعلانات — ليست عروض بيع حقيقية.</p></div>
+  <span class="trade-count" id="tradeCount">0 إعلان</span>
 </div>
-<div class="item" id="mushroomPanel" style="display:none">
-<h3>🍄 سوق المشروم</h3>
-<label>النوع</label><select id="mushroomType"><option>مشروم الأجاريكس</option><option>المشروم المحاري</option><option>شيتاكي</option><option>كينج أويستر</option></select>
-<label>نوع العرض</label><select id="mushroomAction"><option>متاح للبيع</option><option>مطلوب للشراء</option></select>
-<label>الكمية</label><input id="mushroomQuantity" placeholder="مثلاً: 50 كجم">
-<label>المحافظة</label><input id="mushroomLocation" placeholder="مكان المنتج">
-<label>رقم التواصل</label><input id="mushroomPhone" placeholder="رقم الهاتف">
-<button onclick="submitMarketListing('mushroom')">تجهيز الإعلان</button>
+<div class="trade-products" id="tradeListings"></div>
+
+<div class="trade-account">
+  <div><strong>👤 الحساب التجاري</strong><p>جهّز بيانات نشاطك لتظهر للمشترين والموردين.</p></div>
+  <button class="trade-secondary" onclick="openTradeForm('account')">إعداد الحساب</button>
 </div>
-<div class="item" id="accountPanel" style="display:none">
-<h3>👤 الحساب التجاري</h3>
-<label>اسم التاجر / الشركة</label><input id="accountName" placeholder="الاسم التجاري">
-<label>نوع النشاط</label><select id="accountType"><option>مزارع / منتج</option><option>تاجر / موزع</option><option>شركة / مصنع</option><option>مستورد / مصدر</option><option>مورد مستلزمات</option></select>
-<label>المحافظة</label><input id="accountLocation" placeholder="المحافظة">
-<label>رقم التواصل</label><input id="accountPhone" placeholder="رقم الهاتف">
-<button onclick="submitMarketListing('account')">حفظ البيانات مبدئياً</button>
+
+<div class="trade-warning">
+  <strong>معلومة مهمة عن النسخة الحالية</strong>
+  <p>يمكنك تجربة شكل إضافة الإعلان على جهازك، لكن النشر العام وحفظ الإعلانات لكل المستخدمين يحتاجان إلى ربط قاعدة بيانات وتسجيل حسابات. لن نظهر عروضاً تجريبية على أنها منتجات متاحة فعلاً.</p>
 </div>
+
+<div class="trade-modal" id="tradeModal" style="display:none">
+  <div class="trade-modal-card">
+    <button class="trade-close" onclick="closeTradeForm()">✕</button>
+    <h3 id="tradeFormTitle">إضافة إعلان</h3>
+    <div id="tradeFormBody"></div>
+  </div>
 </div>
-<div class="market-note">تنبيه: هذه مرحلة واجهة وتجهيز بيانات فقط. الإعلانات لا تُنشر للعامة ولا يتم حفظها على قاعدة بيانات بعد. سنربط التسجيل والنشر والتواصل بقاعدة بيانات آمنة في المرحلة التالية.</div>
-<div id="listingPreview"></div>
 </section>
 
 <section class="section" id="exchange">
@@ -228,17 +266,6 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 </div>
 </section>
 
-<section class="section" id="calculator">
-<button class="back" onclick="home()">← الرئيسية</button>
-<h2>🧮 حاسبة إنتاج المشروم</h2>
-<label>كمية الكمبوست بالكيلوجرام</label>
-<input type="number" id="compost" placeholder="مثلاً 1000">
-<label>نسبة الإنتاج المتوقعة من وزن الكمبوست %</label>
-<input type="number" id="yieldRate" value="20">
-<button onclick="calculate()">احسب الإنتاج المتوقع</button>
-<div id="calcResult"></div>
-</section>
-
 </main>
 
 <footer>
@@ -247,40 +274,6 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 </footer>
 
 <script>
-
-function showMarketPanel(id){
-  document.querySelectorAll('#marketPanels .item').forEach(p=>p.style.display='none');
-  const panel=document.getElementById(id);
-  if(panel) panel.style.display='block';
-}
-function submitMarketListing(kind){
-  const fields={
-    local:['localAction','localProduct','localQuantity','localLocation','localPrice','localPhone'],
-    trade:['tradeAction','tradeProduct','tradeQuantity','tradeCountry','tradePhone'],
-    request:['requestProduct','requestQuantity','requestLocation','requestPhone'],
-    supply:['supplyProduct','supplyCondition','supplyDetails','supplyPhone'],
-    mushroom:['mushroomType','mushroomAction','mushroomQuantity','mushroomLocation','mushroomPhone'],
-    account:['accountName','accountType','accountLocation','accountPhone']
-  };
-  const labels={
-    local:'إعلان السوق المحلي',trade:'طلب استيراد وتصدير',request:'طلب شراء',
-    supply:'إعلان مستلزمات زراعية',mushroom:'إعلان سوق المشروم',account:'بيانات الحساب التجاري'
-  };
-  const values=(fields[kind]||[]).map(id=>{
-    const el=document.getElementById(id);
-    return el && el.value.trim() ? el.value.trim() : '';
-  });
-  if(values.every(v=>!v)){alert('من فضلك أدخل البيانات أولاً');return;}
-  const box=document.getElementById('listingPreview');
-  box.replaceChildren();
-  const item=document.createElement('div'); item.className='item';
-  const title=document.createElement('strong'); title.textContent='✅ '+labels[kind]+' — معاينة البيانات'; item.appendChild(title);
-  values.forEach((v,i)=>{if(v){const p=document.createElement('p');p.textContent=v;item.appendChild(p);}});
-  const note=document.createElement('p');note.className='small';
-  note.textContent='تم تجهيز معاينة فقط. لم يتم نشر الإعلان أو حفظه على الإنترنت.';
-  item.appendChild(note);box.appendChild(item);
-}
-
 function show(id){
 document.getElementById('welcome').style.display='none';
 document.getElementById('menu').style.display='none';
@@ -528,6 +521,67 @@ box.appendChild(note);
 
 results.appendChild(box);
 }
+
+const tradeDemoListings = [
+ {id:'d1',area:'local',type:'بيع',name:'بطاطس طازجة — عروة حالية',category:'محاصيل زراعية',price:'السعر عند التواصل',quantity:'متاح تحديد الكمية',place:'نموذج عرض — الشرقية',icon:'🥔'},
+ {id:'d2',area:'mushroom',type:'بيع',name:'مشروم أجاريكس طازج',category:'سوق المشروم',price:'السعر عند التواصل',quantity:'مثال: توريد يومي',place:'نموذج عرض — مصر',icon:'🍄'},
+ {id:'d3',area:'supplies',type:'بيع',name:'شبكة ري بالتنقيط',category:'مستلزمات زراعية',price:'يُحدد حسب المواصفات',quantity:'مقاسات مختلفة',place:'نموذج عرض توضيحي',icon:'💧'},
+ {id:'d4',area:'export',type:'تجارة دولية',name:'عرض تصدير موالح',category:'استيراد وتصدير',price:'طلب عرض سعر',quantity:'تحدد حسب الاتفاق',place:'نموذج عرض توضيحي',icon:'🍊'},
+ {id:'d5',area:'requests',type:'طلب شراء',name:'مطلوب توريد بصل',category:'طلبات شراء',price:'يرجى تقديم عرض سعر',quantity:'الكمية تحدد في الطلب',place:'نموذج طلب توضيحي',icon:'🧅'},
+ {id:'d6',area:'local',type:'بيع',name:'قمح — توريد محلي',category:'محاصيل زراعية',price:'السعر عند التواصل',quantity:'حسب المتاح',place:'نموذج عرض توضيحي',icon:'🌾'}
+];
+let tradeCurrentArea='all';
+let tradeUserListings=[];
+function setTradeArea(area,button){
+ tradeCurrentArea=area;
+ document.getElementById('tradeArea').value=area;
+ document.querySelectorAll('.trade-cat').forEach(x=>x.classList.remove('active'));
+ if(button) button.classList.add('active');
+ renderTradeListings();
+}
+function renderTradeListings(){
+ const host=document.getElementById('tradeListings');
+ if(!host) return;
+ const q=(document.getElementById('tradeSearch')?.value||'').trim().toLowerCase();
+ const area=document.getElementById('tradeArea')?.value||tradeCurrentArea;
+ const all=[...tradeUserListings,...tradeDemoListings].filter(x=>(area==='all'||x.area===area)&&(!q||(x.name+' '+x.category+' '+x.place).toLowerCase().includes(q)));
+ document.getElementById('tradeCount').textContent=all.length+' إعلان';
+ host.innerHTML='';
+ if(!all.length){host.innerHTML='<div class="trade-empty">لا توجد نتائج مطابقة. جرّب كلمة بحث أخرى.</div>';return;}
+ all.forEach(x=>{
+  const card=document.createElement('article');card.className='trade-product';
+  card.innerHTML=`<div class="trade-product-art">${x.icon||'🌱'}</div><div class="trade-product-info"><span class="trade-tag">${x.category}</span> <span class="trade-demo">${x.demo?'إعلانك التجريبي':'نموذج توضيحي'}</span><h4>${escapeHTML(x.name)}</h4><p>📦 ${escapeHTML(x.quantity)}</p><p>📍 ${escapeHTML(x.place)}</p><div class="trade-price">${escapeHTML(x.price)}</div><button type="button" onclick="alert('التواصل والنشر العام سيتم تفعليهما بعد ربط قاعدة البيانات والحسابات التجارية.')">تفاصيل العرض</button></div>`;
+  host.appendChild(card);
+ });
+}
+function openTradeForm(type){
+ const modal=document.getElementById('tradeModal'),body=document.getElementById('tradeFormBody'),title=document.getElementById('tradeFormTitle');
+ modal.style.display='flex';
+ if(type==='account'){
+  title.textContent='الحساب التجاري';
+  body.innerHTML=`<p class="small">أدخل بيانات نشاطك كتجهيز مبدئي. لن تُرسل أو تُنشر على الإنترنت الآن.</p><form onsubmit="saveTradeAccount(event)"><label>اسم النشاط أو الشركة</label><input id="accountName" required><label>نوع النشاط</label><select id="accountType"><option>مزارع أو منتج</option><option>تاجر أو موزع</option><option>مصنع</option><option>مستورد أو مصدر</option><option>مستلزمات زراعية</option></select><label>المحافظة</label><input id="accountCity"><label>رقم واتساب للتواصل</label><input id="accountPhone" inputmode="tel"><button type="submit">حفظ على هذا الجهاز</button></form>`;
+  return;
+ }
+ const buying=type==='buy';
+ title.textContent=buying?'إضافة طلب شراء':'إضافة منتج للبيع';
+ body.innerHTML=`<p class="small">تجربة محلية على هذا الجهاز فقط، وليست نشراً عاماً.</p><form onsubmit="saveTradeListing(event,'${type}')"><label>${buying?'اسم المنتج المطلوب':'اسم المنتج'}</label><input id="tradeName" required placeholder="مثلاً: مشروم أجاريكس أو بطاطس"><label>القسم</label><select id="tradeCategory"><option value="local">محاصيل زراعية</option><option value="mushroom">سوق المشروم</option><option value="supplies">مستلزمات ومعدات</option><option value="export">استيراد وتصدير</option></select><label>الكمية</label><input id="tradeQty" required placeholder="مثلاً: 2 طن أو 100 كجم"><label>${buying?'السعر أو الميزانية (اختياري)':'السعر بالجنيه (اختياري)'}</label><input id="tradePrice" placeholder="اتركه فارغاً إذا كان السعر عند التواصل"><label>المحافظة أو بلد التسليم</label><input id="tradePlace" placeholder="مثلاً: الشرقية — مصر"><label>رقم واتساب (اختياري)</label><input id="tradePhone" inputmode="tel"><button type="submit">${buying?'حفظ طلب الشراء':'حفظ الإعلان التجريبي'}</button></form>`;
+}
+function closeTradeForm(){document.getElementById('tradeModal').style.display='none';}
+function saveTradeListing(event,type){
+ event.preventDefault();
+ const buying=type==='buy',name=document.getElementById('tradeName').value.trim(),category=document.getElementById('tradeCategory').value;
+ const listing={id:'u'+Date.now(),area:buying?'requests':category,type:buying?'طلب شراء':'بيع',name,category:category==='mushroom'?'سوق المشروم':category==='supplies'?'مستلزمات ومعدات':category==='export'?'استيراد وتصدير':'محاصيل زراعية',quantity:document.getElementById('tradeQty').value,price:document.getElementById('tradePrice').value||'السعر عند التواصل',place:document.getElementById('tradePlace').value||'لم يحدد المكان',icon:category==='mushroom'?'🍄':category==='supplies'?'🚜':category==='export'?'🚢':'🌱',demo:true};
+ tradeUserListings.unshift(listing);
+ closeTradeForm();renderTradeListings();
+ alert('تمت إضافة الإعلان كتجربة على هذا الجهاز فقط. لن يظهر للمستخدمين الآخرين قبل ربط قاعدة البيانات.');
+}
+function saveTradeAccount(event){
+ event.preventDefault();
+ localStorage.setItem('tabeebTradeAccount',JSON.stringify({name:document.getElementById('accountName').value,type:document.getElementById('accountType').value,city:document.getElementById('accountCity').value,phone:document.getElementById('accountPhone').value}));
+ closeTradeForm();alert('تم حفظ بيانات الحساب على هذا الجهاز فقط.');
+}
+
 </script>
+<script>document.addEventListener("DOMContentLoaded",renderTradeListings);</script>
 </body>
 </html>
