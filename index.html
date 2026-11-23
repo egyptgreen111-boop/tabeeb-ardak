@@ -34,53 +34,10 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 .voice-box button{margin:4px 2px}
 .voice-status{font-size:13px;color:#176b43;margin-top:8px}
 .voice-read{background:#e5f1e8;color:#176b43;margin-top:10px}
-.market-note{background:#fff8e8;border:1px solid #f0dfb7;padding:12px;border-radius:10px;margin-top:12px;font-size:13px}
+.market-grid{margin-top:14px}.market-note{background:#fff8e8;border:1px solid #f0dfb7;padding:12px;border-radius:10px;margin-top:12px;font-size:13px}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}
-
-/* Professional agricultural marketplace */
-.trade-hero{display:flex;align-items:center;justify-content:space-between;gap:15px;background:linear-gradient(120deg,#104d34,#218354);color:#fff;padding:25px;border-radius:20px;margin:12px 0 18px;overflow:hidden}
-.trade-hero h2{color:#fff;font-size:25px;margin:10px 0}
-.trade-hero p{color:#e2f2e8;line-height:1.8;margin:0;max-width:540px}
-.trade-kicker{font-size:12px;background:#ffffff22;padding:7px 11px;border-radius:20px}
-.trade-hero-icon{font-size:65px;opacity:.95}
-.trade-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 18px}
-.trade-primary,.trade-secondary{padding:12px 18px;border-radius:11px;font-weight:bold}
-.trade-primary{background:#f0a72e;color:#263626}
-.trade-secondary{background:#e7f2ea;color:#176b43}
-.trade-search{display:grid;grid-template-columns:1fr 220px;gap:10px;background:#f5f8f5;padding:12px;border-radius:14px}
-.trade-search input,.trade-search select{margin:0;background:#fff}
-.trade-categories{display:flex;gap:8px;overflow-x:auto;padding:14px 0}
-.trade-cat{white-space:nowrap;background:#f1f5f1;color:#385346;border:1px solid #e0e9e1;padding:10px 13px;border-radius:22px}
-.trade-cat.active{background:#176b43;color:white;border-color:#176b43}
-.trade-section-head{display:flex;justify-content:space-between;align-items:center;margin:14px 0}
-.trade-section-head h3{margin:0;color:#20352a}
-.trade-section-head p{margin:5px 0;color:#78867d;font-size:12px}
-.trade-count{font-size:12px;background:#eef5ef;padding:7px 10px;border-radius:20px;color:#176b43}
-.trade-products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.trade-product{border:1px solid #e5ece6;border-radius:15px;overflow:hidden;background:white;box-shadow:0 4px 14px #193b2410}
-.trade-product-art{height:145px;display:flex;align-items:center;justify-content:center;font-size:62px;background:linear-gradient(135deg,#eef6ee,#dcebdd)}
-.trade-product-info{padding:13px}
-.trade-tag{display:inline-block;font-size:11px;color:#176b43;background:#eaf4eb;border-radius:20px;padding:5px 8px;margin-bottom:8px}
-.trade-product h4{margin:0 0 8px;font-size:15px}
-.trade-product p{font-size:12px;color:#738078;line-height:1.7;margin:5px 0}
-.trade-price{font-size:17px;font-weight:bold;color:#176b43;margin:10px 0}
-.trade-product button{width:100%;margin-top:7px;background:#176b43}
-.trade-demo{font-size:10px;color:#9a6a1b;background:#fff5df;padding:5px 7px;border-radius:8px}
-.trade-account{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#f2f7f2;border-radius:15px;padding:16px;margin-top:20px}
-.trade-account p{margin:5px 0 0;color:#718077;font-size:12px}
-.trade-warning{background:#fff8e9;border:1px solid #f0dfb7;border-radius:13px;padding:13px;margin-top:14px;font-size:12px;line-height:1.8}
-.trade-warning p{margin:5px 0 0}
-.trade-modal{position:fixed;inset:0;background:#10251bd9;z-index:1000;display:flex;align-items:center;justify-content:center;padding:15px}
-.trade-modal-card{background:#fff;width:min(520px,100%);max-height:90vh;overflow:auto;border-radius:18px;padding:20px;position:relative}
-.trade-close{float:left;background:#edf3ee;color:#315b43;padding:7px 10px}
-.trade-modal-card h3{margin-top:6px;color:#176b43}
-.trade-modal-card label{display:block;margin-top:10px}
-.trade-modal-card button[type=submit]{width:100%;margin-top:10px}
-.trade-empty{grid-column:1/-1;padding:25px;text-align:center;background:#f5f8f5;border-radius:14px;color:#68786e}
-@media(max-width:700px){.trade-products{grid-template-columns:repeat(2,minmax(0,1fr))}.trade-search{grid-template-columns:1fr}.trade-hero{padding:19px}.trade-hero h2{font-size:20px}.trade-hero-icon{font-size:45px}}
-@media(max-width:430px){.trade-products{grid-template-columns:1fr}.trade-product-art{height:125px}.trade-account{align-items:flex-start;flex-direction:column}}
-
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -91,17 +48,16 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 
 <main class="container">
 
-
 <div class="welcome" id="welcome">
 <h2>أهلاً بك في طبيب أرضك</h2>
-<p>التشخيص الزراعي، والتجارة الزراعية، ومتابعة أسعار السوق في مكان واحد.</p>
-<strong>من المزرعة إلى السوق المحلي والعالمي.</strong>
+<p>شخّص مشكلات محاصيلك، وتداول المنتجات الزراعية، وتابع أسعار الأسواق.</p>
+<strong>التشخيص الزراعي والسوق التجاري وبورصة الأسعار في مكان واحد.</strong>
 </div>
 
 <div class="grid" id="menu">
-<div class="card" onclick="show('diagnosis')"><div class="emoji">📷</div><h3>التشخيص الزراعي</h3><p>حلّل أعراض النبات وارفع صورة للتشخيص</p></div>
-<div class="card" onclick="show('commercialMarket')"><div class="emoji">🛒</div><h3>السوق التجاري الزراعي</h3><p>بيع وشراء محاصيل ومستلزمات محلياً ودولياً</p></div>
-<div class="card" onclick="show('exchange')"><div class="emoji">📈</div><h3>البورصة الزراعية</h3><p>متابعة أسعار المحاصيل والمشروم</p></div>
+<div class="card" onclick="show('diagnosis')"><div class="emoji">📷</div><h3>تشخيص أمراض النبات</h3><p>فحص أعراض وصور النباتات</p></div>
+<div class="card" onclick="show('market')"><div class="emoji">🛒</div><h3>السوق التجاري الزراعي</h3><p>بيع وشراء محلي واستيراد وتصدير</p></div>
+<div class="card" onclick="show('marketPrices')"><div class="emoji">📈</div><h3>البورصة الزراعية</h3><p>متابعة أسعار الأسواق والمحاصيل والمشروم</p></div>
 </div>
 
 <section class="section" id="diagnosis">
@@ -131,139 +87,107 @@ footer{text-align:center;color:#829087;font-size:12px;padding:25px}
 <p class="small">التشخيص الآلي يحتاج اتصالاً بخدمة الذكاء الاصطناعي.</p>
 </section>
 
-
-<section class="section" id="commercialMarket">
+<section class="section" id="market">
 <button class="back" onclick="home()">← الرئيسية</button>
-
-<div class="trade-hero">
-  <div>
-    <span class="trade-kicker">طبيب أرضك • السوق التجاري</span>
-    <h2>سوقك الزراعي.. من أرضك للعالم</h2>
-    <p>اعرض منتجاتك، ابحث عن موردين، وتواصل مباشرة مع شركاء التجارة الزراعية.</p>
-  </div>
-  <div class="trade-hero-icon">🌾</div>
+<h2>🛒 السوق التجاري الزراعي</h2>
+<p>منصة تجمع المزارعين والتجار والموردين والمشترين داخل مصر وخارجها.</p>
+<div class="item" id="authPanel">
+<strong>🔐 حساب التاجر</strong><p id="authStatus">سجّل الدخول أو أنشئ حسابًا لنشر عروضك وطلباتك.</p>
+<label>البريد الإلكتروني</label><input id="authEmail" type="email" autocomplete="email" placeholder="name@example.com">
+<label>كلمة المرور</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="6 أحرف على الأقل">
+<div id="signupFields">
+<label>اسم التاجر أو النشاط</label><input id="authName" placeholder="اسمك أو اسم الشركة">
+<label>رقم الهاتف</label><input id="authPhone" type="tel" placeholder="رقم التواصل">
+<label>المحافظة</label><input id="authGovernorate" placeholder="مثال: الشرقية">
+<label>نوع النشاط</label><select id="authBusinessType"><option>مزارع</option><option>تاجر جملة</option><option>تاجر تجزئة</option><option>شركة / مصنع</option><option>مستورد</option><option>مصدر</option><option>مورد مستلزمات زراعية</option></select>
+<label>العنوان (اختياري)</label><input id="authAddress" placeholder="المدينة أو المنطقة">
+<button type="button" onclick="marketSignUp()">إنشاء حساب جديد</button>
 </div>
-
-<div class="trade-actions">
-  <button class="trade-primary" onclick="openTradeForm('sell')">＋ أضف منتج للبيع</button>
-  <button class="trade-secondary" onclick="openTradeForm('buy')">＋ أضف طلب شراء</button>
+<button type="button" onclick="marketSignIn()">تسجيل الدخول</button>
+<button type="button" onclick="marketSignOut()" style="background:#777">تسجيل الخروج</button>
 </div>
-
-<div class="trade-search">
-  <input id="tradeSearch" type="search" placeholder="ابحث عن محصول، مشروم، سماد، أو معدة..." oninput="renderTradeListings()">
-  <select id="tradeArea" onchange="renderTradeListings()">
-    <option value="all">كل الأسواق</option>
-    <option value="local">السوق المحلي</option>
-    <option value="export">استيراد وتصدير</option>
-    <option value="mushroom">سوق المشروم</option>
-    <option value="supplies">مستلزمات ومعدات</option>
-    <option value="requests">طلبات شراء</option>
-  </select>
+<div class="grid market-grid">
+<div class="card" onclick="show('localMarket')"><div class="emoji">🇪🇬</div><h3>السوق المحلي</h3><p>بيع وشراء المنتجات داخل مصر</p></div>
+<div class="card" onclick="show('internationalMarket')"><div class="emoji">🌍</div><h3>استيراد وتصدير</h3><p>عروض وطلبات التجارة الدولية</p></div>
+<div class="card" onclick="show('buyRequests')"><div class="emoji">📋</div><h3>طلبات الشراء</h3><p>اعرض احتياجك واستقبل عروض الموردين</p></div>
+<div class="card" onclick="show('agriSupplies')"><div class="emoji">🚜</div><h3>مستلزمات ومعدات</h3><p>معدات وأسمدة وبذور ومستلزمات</p></div>
+<div class="card" onclick="show('mushroomMarket')"><div class="emoji">🍄</div><h3>سوق المشروم</h3><p>سوق متخصص للمشروم</p></div>
+<div class="card" onclick="show('marketPrices')"><div class="emoji">📈</div><h3>بورصة الأسعار</h3><p>متابعة أسعار المنتجات الزراعية</p></div>
+<div class="card" onclick="show('businessAccount')"><div class="emoji">👤</div><h3>حسابي التجاري</h3><p>ملفك وعروضك وطلباتك</p></div>
 </div>
-
-<div class="trade-categories">
-  <button class="trade-cat active" data-area="all" onclick="setTradeArea('all',this)">🌐 الكل</button>
-  <button class="trade-cat" data-area="local" onclick="setTradeArea('local',this)">🇪🇬 محلي</button>
-  <button class="trade-cat" data-area="export" onclick="setTradeArea('export',this)">🚢 استيراد وتصدير</button>
-  <button class="trade-cat" data-area="requests" onclick="setTradeArea('requests',this)">📋 طلبات شراء</button>
-  <button class="trade-cat" data-area="supplies" onclick="setTradeArea('supplies',this)">🚜 مستلزمات ومعدات</button>
-  <button class="trade-cat" data-area="mushroom" onclick="setTradeArea('mushroom',this)">🍄 سوق المشروم</button>
-</div>
-
-<div class="trade-section-head">
-  <div><h3>عروض السوق</h3><p>نماذج توضيحية لشكل الإعلانات — ليست عروض بيع حقيقية.</p></div>
-  <span class="trade-count" id="tradeCount">0 إعلان</span>
-</div>
-<div class="trade-products" id="tradeListings"></div>
-
-<div class="trade-account">
-  <div><strong>👤 الحساب التجاري</strong><p>جهّز بيانات نشاطك لتظهر للمشترين والموردين.</p></div>
-  <button class="trade-secondary" onclick="openTradeForm('account')">إعداد الحساب</button>
-</div>
-
-<div class="trade-warning">
-  <strong>معلومة مهمة عن النسخة الحالية</strong>
-  <p>يمكنك تجربة شكل إضافة الإعلان على جهازك، لكن النشر العام وحفظ الإعلانات لكل المستخدمين يحتاجان إلى ربط قاعدة بيانات وتسجيل حسابات. لن نظهر عروضاً تجريبية على أنها منتجات متاحة فعلاً.</p>
-</div>
-
-<div class="trade-modal" id="tradeModal" style="display:none">
-  <div class="trade-modal-card">
-    <button class="trade-close" onclick="closeTradeForm()">✕</button>
-    <h3 id="tradeFormTitle">إضافة إعلان</h3>
-    <div id="tradeFormBody"></div>
-  </div>
-</div>
+<div class="market-note">هذه نسخة أولية للواجهة. نشر العروض والتواصل التجاري وحفظ الحسابات سيتم تفعيله بعد ربط قاعدة بيانات وخدمات آمنة.</div>
 </section>
 
-<section class="section" id="exchange">
-<button class="back" onclick="home()">← الرئيسية</button>
-<h2>📈 البورصة الزراعية المصرية</h2>
+<section class="section" id="localMarket">
+<button class="back" onclick="show('market')">← رجوع للسوق</button><h2>🇪🇬 السوق المحلي</h2>
+<p>تصفح عروض البيع داخل مصر أو جهّز إعلانك كبائع.</p>
+<div id="marketListings" class="item">⏳ جاري تحميل عروض السوق...</div>
+<div class="item"><strong>🛍️ تصفح المنتجات</strong><p>قريبًا: قائمة المنتجات حسب النوع والسعر والكمية والموقع.</p></div>
+<h3>نشر عرض أو طلب</h3>
+<label>نوع الإعلان</label><select id="localListingType"><option value="sell">عرض للبيع</option><option value="buy">طلب شراء</option></select>
+<label>اسم المنتج</label><input id="localProduct" placeholder="مثال: بطاطس، مشروم، بذور...">
+<label>الكمية المتاحة</label><input id="localQuantity" placeholder="مثال: 5 طن أو 200 كجم">
+<label>السعر</label><input id="localPrice" type="number" min="0" placeholder="السعر">
+<label>وحدة السعر</label><select id="localUnit"><option>جنيه / كيلو</option><option>جنيه / طن</option><option>جنيه / عبوة</option><option>السعر قابل للتفاوض</option></select>
+<label>المحافظة / مكان البضاعة</label><input id="localPlace" placeholder="المحافظة أو السوق">
+<label>تفاصيل إضافية</label><textarea id="localDetails" rows="3" placeholder="الجودة، موعد التسليم، التعبئة..."></textarea>
+<button onclick="publishLocalListing()">نشر الإعلان في السوق</button><div id="localPreview"></div>
+</section>
+<section class="section" id="internationalMarket">
+<button class="back" onclick="show('market')">← رجوع للسوق</button><h2>🌍 الاستيراد والتصدير</h2>
+<p>قسم مخصص لعروض التوريد الدولية وطلبات المستوردين والمصدرين.</p>
+<label>نوع العملية</label><select id="tradeType"><option>عرض تصدير من مصر</option><option>طلب استيراد إلى مصر</option><option>طلب شراء من الخارج</option><option>عرض مورد دولي</option></select>
+<label>المنتج والمواصفات</label><input id="tradeProduct" placeholder="اسم المنتج والمواصفات المطلوبة">
+<label>الكمية</label><input id="tradeQuantity" placeholder="الكمية ووحدة القياس">
+<label>الدولة</label><input id="tradeCountry" placeholder="الدولة المستهدفة أو بلد المورد">
+<label>السعر / العملة (اختياري)</label><input id="tradePrice" placeholder="السعر والعملة أو قابل للتفاوض">
+<label>بيانات إضافية</label><textarea id="tradeDetails" rows="3" placeholder="التعبئة، الجودة، شروط التسليم... "></textarea>
+<button onclick="publishInternationalListing()">نشر العرض الدولي</button><div id="tradePreview"></div>
+<div class="market-note">التعامل الدولي يحتاج لاحقًا إلى التحقق من الشركات والمستندات والاشتراطات الخاصة بالمنتج والدولة.</div>
+</section>
+<section class="section" id="buyRequests">
+<button class="back" onclick="show('market')">← رجوع للسوق</button><h2>📋 طلبات الشراء</h2><p>المشتري ينشر احتياجه والموردون يقدمون عروضهم.</p>
+<label>ما المنتج الذي تبحث عنه؟</label><input id="requestProduct" placeholder="اسم المنتج والمواصفات">
+<label>الكمية المطلوبة</label><input id="requestQuantity" placeholder="مثال: 10 طن">
+<label>مكان التسليم</label><input id="requestPlace" placeholder="المحافظة / السوق / الدولة">
+<label>السعر المستهدف (اختياري)</label><input id="requestPrice" placeholder="السعر أو اتركه مفتوحًا للعروض">
+<label>تفاصيل الطلب</label><textarea id="requestDetails" rows="3" placeholder="الجودة، موعد التوريد، التعبئة..."></textarea>
+<button onclick="publishBuyRequest()">نشر طلب الشراء</button><div id="requestPreview"></div>
+</section>
+<section class="section" id="agriSupplies">
+<button class="back" onclick="show('market')">← رجوع للسوق</button><h2>🚜 مستلزمات ومعدات زراعية</h2>
+<p>قسم لتجارة البذور والأسمدة والمبيدات والمعدات وأدوات الري.</p>
+<div class="grid"><div class="card"><div class="emoji">🌱</div><h3>بذور وتقاوي</h3><p>بيع وشراء</p></div><div class="card"><div class="emoji">🧪</div><h3>أسمدة وتغذية</h3><p>منتجات ومستلزمات</p></div><div class="card"><div class="emoji">🛠️</div><h3>معدات وآلات</h3><p>جديد ومستعمل</p></div><div class="card"><div class="emoji">💧</div><h3>ري ومستلزمات</h3><p>شبكات وقطع غيار</p></div></div>
+<div class="market-note">سيتم فتح نشر المنتجات في هذه الفئات عند تجهيز قاعدة البيانات وإجراءات التحقق من البائعين.</div>
+</section>
+<section class="section" id="mushroomMarket">
+<button class="back" onclick="show('market')">← رجوع للسوق</button><h2>🍄 سوق المشروم</h2><p>سوق متخصص للمزارع والموردين والمطاعم والمصانع.</p>
+<label>نوع المشروم</label><select id="mushroomProduct"><option>أجاريكس (Button)</option><option>محاري (Oyster)</option><option>شيتاكي (Shiitake)</option><option>كينج أويستر</option><option>نوع آخر</option></select>
+<label>نوع العرض</label><select id="mushroomOffer"><option>بيع محصول طازج</option><option>طلب شراء</option><option>توريد مستمر</option><option>منتج مصنع / مجمد</option></select>
+<label>الكمية</label><input id="mushroomQuantity" placeholder="كمية بالكيلو أو العبوات">
+<label>السعر</label><input id="mushroomPrice" placeholder="سعر الكيلو أو العبوة">
+<label>المحافظة</label><input id="mushroomPlace" placeholder="مكان المزرعة أو التسليم">
+<button onclick="publishMushroomListing()">نشر إعلان المشروم</button><div id="mushroomPreview"></div>
+</section>
+<section class="section" id="businessAccount">
+<button class="back" onclick="show('market')">← رجوع للسوق</button><h2>👤 حسابي التجاري</h2><p>ملف المزارع أو التاجر أو الشركة.</p>
+<label>نوع الحساب</label><select id="accountType"><option>مزارع</option><option>تاجر جملة</option><option>تاجر تجزئة</option><option>شركة / مصنع</option><option>مستورد</option><option>مصدر</option><option>مورد مستلزمات زراعية</option></select>
+<label>الاسم التجاري (واجهة تجريبية)</label><input id="accountName" placeholder="اسمك أو اسم الشركة">
+<label>المحافظة</label><input id="accountPlace" placeholder="المحافظة">
+<label>نبذة عن نشاطك</label><textarea id="accountBio" rows="3" placeholder="المنتجات أو الخدمات التي تقدمها"></textarea>
+<button type="button" onclick="saveBusinessProfile()">حفظ بيانات الحساب التجاري</button><p id="profileStatus" class="small"></p>
+</section>
+<section class="section" id="marketPrices">
+<button class="back" onclick="show('market')">← رجوع للسوق</button>
+<h2>📈 بورصة الأسعار الزراعية المصرية</h2>
 <p>تابع أسعار المحاصيل والمشروم في أسواق الجملة الرئيسية بمصر.</p>
-
-<div class="item">
-<strong>🇪🇬 أسواق الجملة الرئيسية</strong>
-<p>اختر السوق الذي تريد متابعة أسعاره.</p>
-</div>
-
-<label>نوع المنتجات</label>
-<select id="marketCategory" onchange="updateProducts()">
-<option value="all">جميع المنتجات</option>
-<option value="crops">المحاصيل الزراعية</option>
-<option value="mushroom">المشروم</option>
-</select>
-
-<label>سوق الجملة</label>
-<select id="marketRegion">
-<option value="all">جميع الأسواق</option>
-<option value="obour">سوق العبور – القاهرة الكبرى</option>
-<option value="october">سوق الجملة – 6 أكتوبر</option>
-<option value="hadra">سوق الحضرة – الإسكندرية</option>
-<option value="mansoura">سوق الجملة – المنصورة</option>
-<option value="mostakbal">سوق المستقبل – الإسماعيلية</option>
-<option value="portsaid">سوق الجملة – بورسعيد</option>
-<option value="arab">سوق عرب المدابغ – أسيوط</option>
-<option value="luxor">سوق الحبيل – الأقصر</option>
-</select>
-
-<label>المحصول أو المنتج</label>
-<select id="marketProduct">
-<option value="all">كل المنتجات</option>
-<optgroup label="المحاصيل الزراعية">
-<option>طماطم</option><option>بطاطس</option><option>بصل</option>
-<option>ثوم</option><option>قمح</option><option>أرز</option>
-<option>ذرة</option><option>فلفل</option><option>خيار</option>
-<option>فراولة</option><option>مانجو</option><option>عنب</option>
-<option>برتقال</option><option>ليمون</option>
-</optgroup>
-<optgroup label="المشروم">
-<option>المشروم المحاري</option>
-<option>مشروم الأجاريكس</option>
-<option>مشروم شيتاكي</option>
-<option>مشروم كينج أويستر</option>
-</optgroup>
-</select>
-
-<button onclick="filterMarket()">بحث عن الأسعار</button>
-
-<div id="marketResults">
-<div class="item">
-<strong>📊 بيانات الأسعار</strong>
-<p>اختر السوق والمحصول لعرض البيانات المتاحة.</p>
-</div>
-</div>
-
-<div class="item">
-<strong>ℹ️ بيانات الأسعار التي ستظهر</strong>
-<p>📦 سعر الجملة</p>
-<p>📉 أقل سعر</p>
-<p>📈 أعلى سعر</p>
-<p>📅 تاريخ التحديث</p>
-<p>🔎 مصدر السعر</p>
-</div>
-
-<div class="market-note">
-لن يتم عرض سعر غير موثق. سعر سوق العبور لا يمثل تلقائياً أسعار بقية الأسواق. أسعار المشروم ستحتاج إلى مصدر مستقل موثوق.
-</div>
+<div class="item"><strong>🇪🇬 أسواق الجملة الرئيسية</strong><p>اختر السوق الذي تريد متابعة أسعاره.</p></div>
+<label>نوع المنتجات</label><select id="marketCategory" onchange="updateProducts()"><option value="all">جميع المنتجات</option><option value="crops">المحاصيل الزراعية</option><option value="mushroom">المشروم</option></select>
+<label>سوق الجملة</label><select id="marketRegion"><option value="all">جميع الأسواق</option><option value="obour">سوق العبور – القاهرة الكبرى</option><option value="october">سوق الجملة – 6 أكتوبر</option><option value="hadra">سوق الحضرة – الإسكندرية</option><option value="mansoura">سوق الجملة – المنصورة</option><option value="mostakbal">سوق المستقبل – الإسماعيلية</option><option value="portsaid">سوق الجملة – بورسعيد</option><option value="arab">سوق عرب المدابغ – أسيوط</option><option value="luxor">سوق الحبيل – الأقصر</option></select>
+<label>المحصول أو المنتج</label><select id="marketProduct"><option value="all">كل المنتجات</option><optgroup label="المحاصيل الزراعية"><option>طماطم</option><option>بطاطس</option><option>بصل</option><option>ثوم</option><option>قمح</option><option>أرز</option><option>ذرة</option><option>فلفل</option><option>خيار</option><option>فراولة</option><option>مانجو</option><option>عنب</option><option>برتقال</option><option>ليمون</option></optgroup><optgroup label="المشروم"><option>المشروم المحاري</option><option>مشروم الأجاريكس</option><option>مشروم شيتاكي</option><option>مشروم كينج أويستر</option></optgroup></select>
+<button onclick="filterMarket()">بحث عن الأسعار</button><div id="marketResults"><div class="item"><strong>📊 بيانات الأسعار</strong><p>اختر السوق والمحصول لعرض البيانات المتاحة.</p></div></div>
+<div class="item"><strong>ℹ️ بيانات الأسعار التي ستظهر</strong><p>📦 سعر الجملة</p><p>📉 أقل سعر</p><p>📈 أعلى سعر</p><p>📅 تاريخ التحديث</p><p>🔎 مصدر السعر</p></div>
+<div class="market-note">لن يتم عرض سعر غير موثق. سعر سوق العبور لا يمثل تلقائيًا أسعار بقية الأسواق. أسعار المشروم ستحتاج إلى مصدر مستقل.</div>
 </section>
 
 </main>
@@ -426,17 +350,6 @@ function stopSpeaking(){
 if(window.speechSynthesis) window.speechSynthesis.cancel();
 }
 
-function calculate(){
-const c=Number(document.getElementById('compost').value);
-const r=Number(document.getElementById('yieldRate').value);
-if(c<=0 || r<=0 || r>100){
-alert('أدخل كمية صحيحة ونسبة إنتاج أكبر من صفر ولا تتجاوز 100%');
-return;
-}
-document.getElementById('calcResult').innerHTML=
-'<div class="item">الإنتاج المتوقع حسابياً: <strong>'+(c*r/100).toFixed(1)+' كجم</strong><br><small>تقدير افتراضي يعتمد على نسبة الإنتاج التي أدخلتها، وليس ضماناً للمحصول.</small></div>';
-}
-
 function updateProducts(){
 const category=document.getElementById('marketCategory').value;
 const product=document.getElementById('marketProduct');
@@ -522,66 +435,122 @@ box.appendChild(note);
 results.appendChild(box);
 }
 
-const tradeDemoListings = [
- {id:'d1',area:'local',type:'بيع',name:'بطاطس طازجة — عروة حالية',category:'محاصيل زراعية',price:'السعر عند التواصل',quantity:'متاح تحديد الكمية',place:'نموذج عرض — الشرقية',icon:'🥔'},
- {id:'d2',area:'mushroom',type:'بيع',name:'مشروم أجاريكس طازج',category:'سوق المشروم',price:'السعر عند التواصل',quantity:'مثال: توريد يومي',place:'نموذج عرض — مصر',icon:'🍄'},
- {id:'d3',area:'supplies',type:'بيع',name:'شبكة ري بالتنقيط',category:'مستلزمات زراعية',price:'يُحدد حسب المواصفات',quantity:'مقاسات مختلفة',place:'نموذج عرض توضيحي',icon:'💧'},
- {id:'d4',area:'export',type:'تجارة دولية',name:'عرض تصدير موالح',category:'استيراد وتصدير',price:'طلب عرض سعر',quantity:'تحدد حسب الاتفاق',place:'نموذج عرض توضيحي',icon:'🍊'},
- {id:'d5',area:'requests',type:'طلب شراء',name:'مطلوب توريد بصل',category:'طلبات شراء',price:'يرجى تقديم عرض سعر',quantity:'الكمية تحدد في الطلب',place:'نموذج طلب توضيحي',icon:'🧅'},
- {id:'d6',area:'local',type:'بيع',name:'قمح — توريد محلي',category:'محاصيل زراعية',price:'السعر عند التواصل',quantity:'حسب المتاح',place:'نموذج عرض توضيحي',icon:'🌾'}
-];
-let tradeCurrentArea='all';
-let tradeUserListings=[];
-function setTradeArea(area,button){
- tradeCurrentArea=area;
- document.getElementById('tradeArea').value=area;
- document.querySelectorAll('.trade-cat').forEach(x=>x.classList.remove('active'));
- if(button) button.classList.add('active');
- renderTradeListings();
+
+// ===== السوق التجاري المتصل بـ Supabase =====
+const SUPABASE_URL = 'https://okeanmemyfyimgakpwgn.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_UcsEibEdZPC_ZJhfBzfONA_nOIwSS30';
+let marketDb = null;
+let currentMarketUser = null;
+let currentSeller = null;
+
+function marketMessage(id, message, isError=false){
+  const el=document.getElementById(id); if(!el) return;
+  el.textContent=message; el.style.color=isError?'#a12626':'#176b43';
 }
-function renderTradeListings(){
- const host=document.getElementById('tradeListings');
- if(!host) return;
- const q=(document.getElementById('tradeSearch')?.value||'').trim().toLowerCase();
- const area=document.getElementById('tradeArea')?.value||tradeCurrentArea;
- const all=[...tradeUserListings,...tradeDemoListings].filter(x=>(area==='all'||x.area===area)&&(!q||(x.name+' '+x.category+' '+x.place).toLowerCase().includes(q)));
- document.getElementById('tradeCount').textContent=all.length+' إعلان';
- host.innerHTML='';
- if(!all.length){host.innerHTML='<div class="trade-empty">لا توجد نتائج مطابقة. جرّب كلمة بحث أخرى.</div>';return;}
- all.forEach(x=>{
-  const card=document.createElement('article');card.className='trade-product';
-  card.innerHTML=`<div class="trade-product-art">${x.icon||'🌱'}</div><div class="trade-product-info"><span class="trade-tag">${x.category}</span> <span class="trade-demo">${x.demo?'إعلانك التجريبي':'نموذج توضيحي'}</span><h4>${escapeHTML(x.name)}</h4><p>📦 ${escapeHTML(x.quantity)}</p><p>📍 ${escapeHTML(x.place)}</p><div class="trade-price">${escapeHTML(x.price)}</div><button type="button" onclick="alert('التواصل والنشر العام سيتم تفعليهما بعد ربط قاعدة البيانات والحسابات التجارية.')">تفاصيل العرض</button></div>`;
-  host.appendChild(card);
- });
+function marketText(id){ return (document.getElementById(id)?.value || '').trim(); }
+function marketNumber(id){ const n=Number(marketText(id)); return Number.isFinite(n)?n:null; }
+function setMarketAuthUI(){
+  const signed=!!currentMarketUser;
+  const signup=document.getElementById('signupFields'); if(signup) signup.style.display=signed?'none':'block';
+  marketMessage('authStatus', signed ? `تم تسجيل الدخول: ${currentMarketUser.email}` : 'سجّل الدخول أو أنشئ حسابًا لنشر عروضك وطلباتك.');
 }
-function openTradeForm(type){
- const modal=document.getElementById('tradeModal'),body=document.getElementById('tradeFormBody'),title=document.getElementById('tradeFormTitle');
- modal.style.display='flex';
- if(type==='account'){
-  title.textContent='الحساب التجاري';
-  body.innerHTML=`<p class="small">أدخل بيانات نشاطك كتجهيز مبدئي. لن تُرسل أو تُنشر على الإنترنت الآن.</p><form onsubmit="saveTradeAccount(event)"><label>اسم النشاط أو الشركة</label><input id="accountName" required><label>نوع النشاط</label><select id="accountType"><option>مزارع أو منتج</option><option>تاجر أو موزع</option><option>مصنع</option><option>مستورد أو مصدر</option><option>مستلزمات زراعية</option></select><label>المحافظة</label><input id="accountCity"><label>رقم واتساب للتواصل</label><input id="accountPhone" inputmode="tel"><button type="submit">حفظ على هذا الجهاز</button></form>`;
-  return;
- }
- const buying=type==='buy';
- title.textContent=buying?'إضافة طلب شراء':'إضافة منتج للبيع';
- body.innerHTML=`<p class="small">تجربة محلية على هذا الجهاز فقط، وليست نشراً عاماً.</p><form onsubmit="saveTradeListing(event,'${type}')"><label>${buying?'اسم المنتج المطلوب':'اسم المنتج'}</label><input id="tradeName" required placeholder="مثلاً: مشروم أجاريكس أو بطاطس"><label>القسم</label><select id="tradeCategory"><option value="local">محاصيل زراعية</option><option value="mushroom">سوق المشروم</option><option value="supplies">مستلزمات ومعدات</option><option value="export">استيراد وتصدير</option></select><label>الكمية</label><input id="tradeQty" required placeholder="مثلاً: 2 طن أو 100 كجم"><label>${buying?'السعر أو الميزانية (اختياري)':'السعر بالجنيه (اختياري)'}</label><input id="tradePrice" placeholder="اتركه فارغاً إذا كان السعر عند التواصل"><label>المحافظة أو بلد التسليم</label><input id="tradePlace" placeholder="مثلاً: الشرقية — مصر"><label>رقم واتساب (اختياري)</label><input id="tradePhone" inputmode="tel"><button type="submit">${buying?'حفظ طلب الشراء':'حفظ الإعلان التجريبي'}</button></form>`;
+async function ensureSellerProfile(){
+  if(!marketDb || !currentMarketUser) return null;
+  const {data:existing,error:readError}=await marketDb.from('sellers').select('*').eq('user_id',currentMarketUser.id).maybeSingle();
+  if(readError) throw readError;
+  if(existing) return existing;
+  const meta=currentMarketUser.user_metadata || {};
+  const profile={user_id:currentMarketUser.id,seller_name:meta.seller_name || currentMarketUser.email,phone:meta.phone || '',email:currentMarketUser.email,governorate:meta.governorate || '',business_type:meta.business_type || 'مزارع',address:meta.address || ''};
+  const {data:created,error}=await marketDb.from('sellers').insert(profile).select().single();
+  if(error) throw new Error('تعذر إنشاء ملف التاجر. تأكد أن عمود sellers.id ينشئ رقمه تلقائيًا (Identity)، ثم راجع سياسات الجدول. التفاصيل: '+error.message);
+  return created;
 }
-function closeTradeForm(){document.getElementById('tradeModal').style.display='none';}
-function saveTradeListing(event,type){
- event.preventDefault();
- const buying=type==='buy',name=document.getElementById('tradeName').value.trim(),category=document.getElementById('tradeCategory').value;
- const listing={id:'u'+Date.now(),area:buying?'requests':category,type:buying?'طلب شراء':'بيع',name,category:category==='mushroom'?'سوق المشروم':category==='supplies'?'مستلزمات ومعدات':category==='export'?'استيراد وتصدير':'محاصيل زراعية',quantity:document.getElementById('tradeQty').value,price:document.getElementById('tradePrice').value||'السعر عند التواصل',place:document.getElementById('tradePlace').value||'لم يحدد المكان',icon:category==='mushroom'?'🍄':category==='supplies'?'🚜':category==='export'?'🚢':'🌱',demo:true};
- tradeUserListings.unshift(listing);
- closeTradeForm();renderTradeListings();
- alert('تمت إضافة الإعلان كتجربة على هذا الجهاز فقط. لن يظهر للمستخدمين الآخرين قبل ربط قاعدة البيانات.');
+async function initMarketDatabase(){
+  try{
+    if(!window.supabase){ marketMessage('authStatus','تعذر تحميل مكتبة الاتصال. تحقق من الإنترنت ثم أعد تحميل الصفحة.',true); return; }
+    marketDb=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+    const {data:{session}}=await marketDb.auth.getSession();
+    currentMarketUser=session?.user || null;
+    if(currentMarketUser){ try{currentSeller=await ensureSellerProfile();}catch(e){marketMessage('authStatus',e.message,true);} }
+    setMarketAuthUI();
+    marketDb.auth.onAuthStateChange((_event,session)=>{
+      currentMarketUser=session?.user || null; currentSeller=null; setMarketAuthUI();
+      if(currentMarketUser) setTimeout(async()=>{try{currentSeller=await ensureSellerProfile();}catch(e){marketMessage('authStatus',e.message,true);}},0);
+    });
+    await loadMarketListings();
+  }catch(e){ marketMessage('authStatus','خطأ في الاتصال بالسوق: '+e.message,true); }
 }
-function saveTradeAccount(event){
- event.preventDefault();
- localStorage.setItem('tabeebTradeAccount',JSON.stringify({name:document.getElementById('accountName').value,type:document.getElementById('accountType').value,city:document.getElementById('accountCity').value,phone:document.getElementById('accountPhone').value}));
- closeTradeForm();alert('تم حفظ بيانات الحساب على هذا الجهاز فقط.');
+async function marketSignUp(){
+  if(!marketDb) return marketMessage('authStatus','الاتصال بالسوق لم يجهز بعد.',true);
+  const email=marketText('authEmail'),password=marketText('authPassword'),name=marketText('authName'),phone=marketText('authPhone'),governorate=marketText('authGovernorate');
+  if(!email || password.length<6 || !name || !phone || !governorate) return marketMessage('authStatus','أكمل البريد وكلمة المرور (6 أحرف على الأقل) والاسم والهاتف والمحافظة.',true);
+  marketMessage('authStatus','جارٍ إنشاء الحساب...');
+  const {data,error}=await marketDb.auth.signUp({email,password,options:{data:{seller_name:name,phone,governorate,business_type:marketText('authBusinessType'),address:marketText('authAddress')}}});
+  if(error) return marketMessage('authStatus','تعذر إنشاء الحساب: '+error.message,true);
+  if(data.session){currentMarketUser=data.user;try{currentSeller=await ensureSellerProfile();}catch(e){return marketMessage('authStatus',e.message,true);}setMarketAuthUI();marketMessage('authStatus','تم إنشاء الحساب وتسجيل الدخول بنجاح.');}
+  else marketMessage('authStatus','تم إنشاء الحساب. راجع بريدك الإلكتروني لتأكيده، ثم سجّل الدخول من هنا.');
 }
+async function marketSignIn(){
+  if(!marketDb) return marketMessage('authStatus','الاتصال بالسوق لم يجهز بعد.',true);
+  const {data,error}=await marketDb.auth.signInWithPassword({email:marketText('authEmail'),password:marketText('authPassword')});
+  if(error) return marketMessage('authStatus','تعذر تسجيل الدخول: '+error.message,true);
+  currentMarketUser=data.user;try{currentSeller=await ensureSellerProfile();}catch(e){return marketMessage('authStatus',e.message,true);}setMarketAuthUI();await loadMarketListings();
+}
+async function marketSignOut(){
+  if(!marketDb) return; const {error}=await marketDb.auth.signOut(); if(error) return marketMessage('authStatus',error.message,true);
+  currentMarketUser=null;currentSeller=null;setMarketAuthUI();
+}
+async function saveBusinessProfile(){
+  if(!currentMarketUser) return marketMessage('profileStatus','سجّل الدخول أولاً.',true);
+  try{
+    currentSeller=await ensureSellerProfile();
+    const update={seller_name:marketText('accountName') || currentSeller.seller_name,governorate:marketText('accountPlace') || currentSeller.governorate,business_type:marketText('accountType') || currentSeller.business_type};
+    const {error}=await marketDb.from('sellers').update(update).eq('user_id',currentMarketUser.id);
+    if(error) throw error; marketMessage('profileStatus','تم حفظ بيانات الحساب التجاري.');
+  }catch(e){marketMessage('profileStatus','تعذر الحفظ: '+e.message,true);}
+}
+async function publishProduct({name,price,quantity,category,description,country='مصر',governorate,listingType='sell',unit='',phone=''}){
+  if(!currentMarketUser) throw new Error('يجب تسجيل الدخول أولاً قبل نشر إعلان.');
+  if(!name || !quantity || !category) throw new Error('أكمل اسم المنتج والكمية والقسم.');
+  if(listingType==='sell' && price!==null && price<0) throw new Error('أدخل سعرًا صحيحًا للعرض.');
+  currentSeller=await ensureSellerProfile();
+  const row={product_name:name,price:price,quantity:quantity,category:category,description:description || '',country:country || 'مصر',governorate:governorate || currentSeller.governorate || '',seller_phone:phone || currentSeller.phone || '',seller_id:currentSeller.id,listing_type:listingType,unit:unit || null};
+  const {error}=await marketDb.from('products').insert(row);
+  if(error) throw error;
+  await loadMarketListings();
+}
+async function publishLocalListing(){
+  try{await publishProduct({name:marketText('localProduct'),price:marketNumber('localPrice'),quantity:marketText('localQuantity'),category:'منتجات زراعية',description:marketText('localDetails')+' | وحدة السعر: '+marketText('localUnit'),governorate:marketText('localPlace'),listingType:marketText('localListingType'),unit:marketText('localUnit')});marketMessage('localPreview','تم نشر إعلانك بنجاح في السوق.');}catch(e){marketMessage('localPreview',e.message,true);}
+}
+async function publishInternationalListing(){
+  try{const type=marketText('tradeType');const listingType=type.includes('طلب')?'buy':'sell';await publishProduct({name:marketText('tradeProduct'),price:marketNumber('tradePrice'),quantity:marketText('tradeQuantity'),category:'تجارة دولية',description:type+' | '+marketText('tradeDetails')+' | السعر: '+marketText('tradePrice'),country:marketText('tradeCountry'),governorate:'',listingType,unit:'حسب الاتفاق'});marketMessage('tradePreview','تم نشر الإعلان الدولي.');}catch(e){marketMessage('tradePreview',e.message,true);}
+}
+async function publishBuyRequest(){
+  try{await publishProduct({name:marketText('requestProduct'),price:marketNumber('requestPrice'),quantity:marketText('requestQuantity'),category:'طلب شراء',description:marketText('requestDetails')+' | السعر المستهدف: '+marketText('requestPrice'),governorate:marketText('requestPlace'),listingType:'buy'});marketMessage('requestPreview','تم نشر طلب الشراء بنجاح.');}catch(e){marketMessage('requestPreview',e.message,true);}
+}
+async function publishMushroomListing(){
+  try{const offer=marketText('mushroomOffer');const type=offer.includes('طلب شراء')?'buy':'sell';await publishProduct({name:marketText('mushroomProduct'),price:(parseFloat(marketText('mushroomPrice')) || null),quantity:marketText('mushroomQuantity'),category:'مشروم',description:offer,governorate:marketText('mushroomPlace'),listingType:type,unit:'كيلو / عبوة'});marketMessage('mushroomPreview','تم نشر إعلان المشروم.');}catch(e){marketMessage('mushroomPreview',e.message,true);}
+}
+function renderListingCard(item){
+  const card=document.createElement('div');card.className='item';
+  const title=document.createElement('strong');title.textContent=(item.listing_type==='buy'?'📋 مطلوب شراء: ':'🛒 للبيع: ')+(item.product_name||'منتج');card.appendChild(title);
+  const details=[`الكمية: ${item.quantity ?? 'غير محدد'} ${item.unit||''}`,`السعر: ${item.price===null || item.price===undefined?'قابل للتفاوض':item.price+' جنيه'}`,`القسم: ${item.category||'عام'}`,`المكان: ${[item.governorate,item.country].filter(Boolean).join(' - ')}`];
+  details.forEach(t=>{const p=document.createElement('p');p.textContent=t;card.appendChild(p);});
+  if(item.description){const d=document.createElement('p');d.textContent=item.description;card.appendChild(d);}
+  if(item.seller_phone){const tel=document.createElement('p');tel.textContent='تواصل مع المعلن: '+item.seller_phone;card.appendChild(tel);}
+  const date=document.createElement('small');date.textContent='تاريخ النشر: '+new Date(item.created_at).toLocaleDateString('ar-EG');card.appendChild(date);return card;
+}
+async function loadMarketListings(){
+  const target=document.getElementById('marketListings');if(!target || !marketDb)return;
+  target.textContent='⏳ جاري تحميل إعلانات السوق...';
+  const {data,error}=await marketDb.from('products').select('id,created_at,product_name,price,quantity,category,description,country,governorate,seller_phone,listing_type,unit').order('created_at',{ascending:false}).limit(100);
+  target.replaceChildren();
+  if(error){target.textContent='تعذر تحميل الإعلانات: '+error.message;return;}
+  if(!data || !data.length){target.textContent='لا توجد إعلانات منشورة حتى الآن. كن أول من يضيف عرضًا أو طلب شراء.';return;}
+  data.forEach(item=>target.appendChild(renderListingCard(item)));
+}
+document.addEventListener('DOMContentLoaded',initMarketDatabase);
 
 </script>
-<script>document.addEventListener("DOMContentLoaded",renderTradeListings);</script>
 </body>
 </html>
